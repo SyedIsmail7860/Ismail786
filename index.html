@@ -1,16 +1,964 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Image</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Ismail | Developer Portfolio</title>
+
+  <meta
+    name="description"
+    content="Ismail - B.Tech CSE Student and Developer Portfolio"
+  >
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <h1>My Image</h1>
+  <!-- =========================
+       BACKGROUND
+  ========================== -->
+  <div class="background-effects">
+    <div class="aurora"></div>
+    <div class="stars"></div>
+    <div class="particles"></div>
+    <div class="grid-background"></div>
+  </div>
 
-    <img src="ismail.jpg" alt="My image" width="500">
+  <!-- Scroll Progress -->
+  <div id="scrollProgress"></div>
+
+
+  <!-- =========================
+       NAVBAR
+  ========================== -->
+  <header class="navbar" id="navbar">
+
+    <div class="nav-container">
+
+      <a href="#home" class="logo">
+        <span>Ismail</span>
+        <b>|</b>
+        <small>Developer Portfolio</small>
+      </a>
+
+      <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <nav class="nav-links" id="navLinks">
+
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#projects">Projects</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
+
+      </nav>
+
+      <div class="nav-actions">
+
+        <button
+          class="search-button"
+          type="button"
+          onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})"
+        >
+          🔍 <span>Search...</span>
+        </button>
+
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Toggle theme"
+        >
+          ☀️
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+  <main>
+
+    <section class="hero section" id="home">
+
+      <div class="hero-container">
+
+        <!-- Profile Image -->
+        <div class="hero-image-area">
+
+          <div class="hero-ring"></div>
+
+          <div class="hero-image-wrapper">
+
+            <img
+              src="ismail.jpg"
+              alt="Ismail"
+              class="hero-image"
+            >
+
+          </div>
+
+        </div>
+
+
+        <!-- Hero Content -->
+        <div class="hero-content">
+
+          <div class="developer-badge">
+            🚀 CSE Developer
+          </div>
+
+          <h1>
+            Hi, I'm
+            <span>Ismail</span>
+          </h1>
+
+          <h2>
+            B.Tech CSE Student | Viswam Engineering College
+          </h2>
+
+          <p>
+            I'm a passionate developer, currently pursuing B.Tech in
+            Computer Science & Engineering. I love working with Python,
+            SQL, Web Development and exploring modern technologies.
+          </p>
+
+
+          <div class="hero-buttons">
+
+            <a href="#projects" class="btn btn-primary">
+              View Projects
+              <span>→</span>
+            </a>
+
+            <a href="#contact" class="btn btn-outline">
+              ✉ Contact Me
+            </a>
+
+            <button
+              class="btn btn-outline"
+              type="button"
+              onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'})"
+            >
+              &lt;/&gt; Developer Mode
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- Right Information Panel -->
+        <aside class="hero-panel">
+
+          <div class="live-time">
+
+            <div class="panel-title">
+              <span class="panel-icon">◷</span>
+              Live Date & Time
+            </div>
+
+            <div id="liveDateTime">
+              Loading...
+            </div>
+
+          </div>
+
+
+          <div class="theme-panel">
+
+            <h3>Theme Colors</h3>
+
+            <div class="theme-colors">
+
+              <button
+                class="color-dot cyan"
+                data-theme="cyan"
+                aria-label="Cyan theme"
+              ></button>
+
+              <button
+                class="color-dot blue"
+                data-theme="blue"
+                aria-label="Blue theme"
+              ></button>
+
+              <button
+                class="color-dot purple"
+                data-theme="purple"
+                aria-label="Purple theme"
+              ></button>
+
+              <button
+                class="color-dot green"
+                data-theme="green"
+                aria-label="Green theme"
+              ></button>
+
+              <button
+                class="color-dot pink"
+                data-theme="pink"
+                aria-label="Pink theme"
+              ></button>
+
+              <button
+                class="color-dot rainbow"
+                data-theme="rainbow"
+                aria-label="Rainbow theme"
+              ></button>
+
+            </div>
+
+          </div>
+
+
+          <div class="music-panel">
+
+            <h3>🎵 Background Music</h3>
+
+            <div class="music-controls">
+
+              <button
+                id="musicButton"
+                class="music-button"
+                type="button"
+                aria-label="Play music"
+                title="Play music"
+              >
+                ▶
+              </button>
+
+              <span id="musicStatus">Play</span>
+
+              <div class="music-line">
+                <span></span>
+              </div>
+
+              <span>🔊</span>
+
+            </div>
+
+          </div>
+
+        </aside>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT + SKILLS
+    ========================== -->
+    <section class="section about-skills-section" id="about">
+
+      <div class="two-column">
+
+        <!-- ABOUT -->
+        <article class="glass-card about-card reveal">
+
+          <div class="card-heading">
+
+            <span class="heading-icon">👤</span>
+
+            <h2>About Me</h2>
+
+          </div>
+
+          <p>
+            I'm Ismail, a B.Tech CSE student at Viswam Engineering College.
+          </p>
+
+          <p>
+            I'm interested in Python, SQL, Web Development, Software
+            Development and modern technologies. I'm always eager to learn,
+            build and grow in the tech world.
+          </p>
+
+          <div class="education-info">
+
+            <span>📍</span>
+            <strong>Viswam Engineering College</strong>
+
+            <i>|</i>
+
+            <span>CSE (R24)</span>
+
+            <i>|</i>
+
+            <span>2024 - 2028</span>
+
+          </div>
+
+        </article>
+
+
+        <!-- SKILLS -->
+        <article class="glass-card skills-card reveal" id="skills">
+
+          <div class="card-heading">
+
+            <span class="heading-icon">♟</span>
+
+            <h2>Skills</h2>
+
+          </div>
+
+
+          <div class="skill">
+
+            <div class="skill-top">
+              <span>Python</span>
+              <span>75%</span>
+            </div>
+
+            <div class="skill-bar">
+              <span style="width:75%"></span>
+            </div>
+
+          </div>
+
+
+          <div class="skill">
+
+            <div class="skill-top">
+              <span>SQL</span>
+              <span>70%</span>
+            </div>
+
+            <div class="skill-bar">
+              <span style="width:70%"></span>
+            </div>
+
+          </div>
+
+
+          <div class="skill">
+
+            <div class="skill-top">
+              <span>HTML</span>
+              <span>85%</span>
+            </div>
+
+            <div class="skill-bar">
+              <span style="width:85%"></span>
+            </div>
+
+          </div>
+
+
+          <div class="skill">
+
+            <div class="skill-top">
+              <span>CSS</span>
+              <span>75%</span>
+            </div>
+
+            <div class="skill-bar">
+              <span style="width:75%"></span>
+            </div>
+
+          </div>
+
+
+          <div class="skill">
+
+            <div class="skill-top">
+              <span>JavaScript</span>
+              <span>65%</span>
+            </div>
+
+            <div class="skill-bar">
+              <span style="width:65%"></span>
+            </div>
+
+          </div>
+
+
+          <div class="skill">
+
+            <div class="skill-top">
+              <span>GitHub</span>
+              <span>80%</span>
+            </div>
+
+            <div class="skill-bar">
+              <span style="width:80%"></span>
+            </div>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         TIMELINE
+    ========================== -->
+    <section class="section" id="timeline">
+
+      <div class="glass-card timeline-card reveal">
+
+        <div class="card-heading">
+
+          <span class="heading-icon">◷</span>
+
+          <h2>Timeline</h2>
+
+        </div>
+
+
+        <div class="timeline">
+
+          <div class="timeline-item">
+
+            <div class="timeline-icon">
+              🎓
+            </div>
+
+            <div class="timeline-content">
+
+              <strong>2024</strong>
+
+              <h3>Started B.Tech CSE</h3>
+
+              <p>Viswam Engineering College</p>
+
+            </div>
+
+          </div>
+
+
+          <div class="timeline-line"></div>
+
+
+          <div class="timeline-item">
+
+            <div class="timeline-icon">
+              🐍
+            </div>
+
+            <div class="timeline-content">
+
+              <strong>2025</strong>
+
+              <h3>Learned Python</h3>
+
+              <p>Started coding journey</p>
+
+            </div>
+
+          </div>
+
+
+          <div class="timeline-line"></div>
+
+
+          <div class="timeline-item">
+
+            <div class="timeline-icon">
+              🌐
+            </div>
+
+            <div class="timeline-content">
+
+              <strong>2026</strong>
+
+              <h3>Web Development</h3>
+
+              <p>Built real projects</p>
+
+            </div>
+
+          </div>
+
+
+          <div class="timeline-line"></div>
+
+
+          <div class="timeline-item">
+
+            <div class="timeline-icon">
+              🎯
+            </div>
+
+            <div class="timeline-content">
+
+              <strong>Future</strong>
+
+              <h3>Software Developer</h3>
+
+              <p>Build a better tomorrow</p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         PROJECTS
+    ========================== -->
+    <section class="section" id="projects">
+
+      <div class="section-header">
+
+        <div class="card-heading">
+
+          <span class="heading-icon">📁</span>
+
+          <h2>Projects</h2>
+
+        </div>
+
+        <a href="#projects">
+          View All Projects →
+        </a>
+
+      </div>
+
+
+      <div class="projects-grid">
+
+
+        <!-- Project 1 -->
+        <article class="project-card reveal">
+
+          <div class="project-image github-project">
+            <span>◉</span>
+          </div>
+
+          <div class="project-content">
+
+            <h3>My First GitHub Project</h3>
+
+            <p>
+              A simple project to learn GitHub and version control.
+            </p>
+
+            <a
+              href="https://github.com/SyedIsmail7860"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Project →
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- Project 2 -->
+        <article class="project-card reveal">
+
+          <div class="project-image shatter-project">
+            <img
+              src="ismail.jpg"
+              alt="Photo Shatter Effect"
+            >
+          </div>
+
+          <div class="project-content">
+
+            <h3>Photo Shatter Effect</h3>
+
+            <p>
+              A creative image effect using JavaScript and CSS.
+            </p>
+
+            <a href="#gallery">
+              View Project →
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- Project 3 -->
+        <article class="project-card reveal">
+
+          <div class="project-image gallery-project">
+            <span>🏔️</span>
+          </div>
+
+          <div class="project-content">
+
+            <h3>Gallery</h3>
+
+            <p>
+              A responsive image gallery with smooth UI.
+            </p>
+
+            <a href="#gallery">
+              View Project →
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- Project 4 -->
+        <article class="project-card reveal">
+
+          <div class="project-image python-project">
+            <span>🐍</span>
+          </div>
+
+          <div class="project-content">
+
+            <h3>Python Code Showcase</h3>
+
+            <p>
+              Sample Python codes with output and explanation.
+            </p>
+
+            <a href="#skills">
+              View Project →
+            </a>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         GALLERY
+    ========================== -->
+    <section class="section" id="gallery">
+
+      <div class="section-header">
+
+        <div class="card-heading">
+          <span class="heading-icon">🖼️</span>
+          <h2>Gallery</h2>
+        </div>
+
+      </div>
+
+
+      <div class="gallery-grid">
+
+        <div class="gallery-item reveal">
+          <img src="ismail.jpg" alt="Ismail">
+        </div>
+
+        <div class="gallery-placeholder reveal">
+          <span>+</span>
+          <p>Add Photo</p>
+        </div>
+
+        <div class="gallery-placeholder reveal">
+          <span>+</span>
+          <p>Add Photo</p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         RESUME
+    ========================== -->
+    <section class="section" id="resume">
+
+      <div class="resume-card glass-card reveal">
+
+        <div>
+          <span class="resume-icon">📄</span>
+
+          <h2>My Resume</h2>
+
+          <p>
+            View or download my latest resume.
+          </p>
+        </div>
+
+        <div class="resume-buttons">
+
+          <a
+            href="resume.pdf"
+            target="_blank"
+            class="btn btn-outline"
+          >
+            View Resume
+          </a>
+
+          <a
+            href="resume.pdf"
+            download
+            class="btn btn-primary"
+          >
+            Download Resume
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CTA
+    ========================== -->
+    <section class="section">
+
+      <div class="cta glass-card reveal">
+
+        <div class="cta-icon">
+          &lt;/&gt;
+        </div>
+
+        <div class="cta-text">
+
+          <h2>Let's Build Something Great</h2>
+
+          <p>
+            I'm always open to new opportunities and exciting projects.
+          </p>
+
+        </div>
+
+        <a href="#projects" class="btn btn-primary">
+          View Projects →
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACT
+    ========================== -->
+    <section class="section contact-section" id="contact">
+
+      <div class="section-header">
+
+        <div class="card-heading">
+
+          <span class="heading-icon">✉</span>
+
+          <h2>Contact Me</h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="contact-grid">
+
+        <div class="glass-card contact-info">
+
+          <h3>Let's Connect</h3>
+
+          <p>
+            Feel free to contact me for projects, collaboration,
+            or development opportunities.
+          </p>
+
+          <div class="contact-item">
+            📧
+            <span>ismailgkd123@gmail.com</span>
+          </div>
+
+          <div class="contact-item">
+            💻
+            <span>github.com/SyedIsmail7860</span>
+          </div>
+
+          <div class="contact-item">
+            📍
+            <span>Andhra Pradesh, India</span>
+          </div>
+
+        </div>
+
+
+        <form class="glass-card contact-form" id="contactForm">
+
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Your Name"
+            required
+          >
+
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Your Email"
+            required
+          >
+
+          <textarea
+            name="message"
+            id="message"
+            rows="5"
+            placeholder="Your Message"
+            required
+          ></textarea>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Send Message →
+          </button>
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+  <footer class="footer">
+
+    <div class="footer-left">
+
+      <strong>Ismail</strong>
+
+      <span>|</span>
+
+      <span>Developer Portfolio</span>
+
+    </div>
+
+
+    <div class="footer-social">
+
+      <a
+        href="https://github.com/SyedIsmail7860"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub"
+      >
+        ◉
+      </a>
+
+      <a
+        href="https://www.linkedin.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="LinkedIn"
+      >
+        in
+      </a>
+
+      <a
+        href="mailto:ismailgkd123@gmail.com"
+        aria-label="Email"
+      >
+        ✉
+      </a>
+
+    </div>
+
+
+    <a href="#home" class="back-top">
+      Back to Top ↑
+    </a>
+
+  </footer>
+
+
+  <!-- =========================
+       IMAGE MODAL
+  ========================== -->
+  <div class="image-modal" id="imageModal">
+
+    <button
+      id="modalClose"
+      class="modal-close"
+      type="button"
+      aria-label="Close image"
+    >
+      ×
+    </button>
+
+    <img
+      id="modalImage"
+      src=""
+      alt="Preview"
+    >
+
+  </div>
+
+
+  <!-- =========================
+       TOAST
+  ========================== -->
+  <div class="toast" id="toast"></div>
+
+
+  <!-- =========================
+       MUSIC
+  ========================== -->
+  <audio
+    id="backgroundMusic"
+    src="music.mp3"
+    loop
+    preload="metadata"
+  ></audio>
+
+
+  <!-- =========================
+       BACK TO TOP BUTTON
+  ========================== -->
+  <button
+    class="back-to-top"
+    id="backToTop"
+    type="button"
+    aria-label="Back to top"
+  >
+    ↑
+  </button>
+
+
+  <!-- JavaScript -->
+  <script src="src/app.js"></script>
 
 </body>
 </html>
-
