@@ -1,1039 +1,981 @@
-/* =========================================================
-   ISMAIL | DEVELOPER PORTFOLIO
+/* =========================================
+   HERBAL PLANTS WEBSITE
    src/app.js
-   ========================================================= */
+========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
-  "use strict";
 
-  /* =========================
-     ELEMENTS
-  ========================= */
+    /* =====================================
+       LOADER
+    ===================================== */
 
-  const body = document.body;
+    const loader = document.getElementById("loader");
 
-  const navbar = document.getElementById("navbar");
-  const navLinks = document.getElementById("navLinks");
-  const menuButton = document.getElementById("menuButton");
-
-  const themeToggle = document.getElementById("themeToggle");
-
-  const scrollProgress =
-    document.getElementById("scrollProgress");
-
-  const liveDateTime =
-    document.getElementById("liveDateTime");
-
-  const musicButton =
-    document.getElementById("musicButton");
-
-  const musicStatus =
-    document.getElementById("musicStatus");
-
-  const backgroundMusic =
-    document.getElementById("backgroundMusic");
-
-  const backToTop =
-    document.getElementById("backToTop");
-
-  const contactForm =
-    document.getElementById("contactForm");
-
-  const toast =
-    document.getElementById("toast");
-
-  const imageModal =
-    document.getElementById("imageModal");
-
-  const modalImage =
-    document.getElementById("modalImage");
-
-  const modalClose =
-    document.getElementById("modalClose");
-
-
-  /* =========================
-     THEME MODE
-  ========================= */
-
-  const savedMode =
-    localStorage.getItem("ismail-theme-mode");
-
-  if (savedMode === "light") {
-    body.classList.add("light-theme");
-
-    if (themeToggle) {
-      themeToggle.textContent = "🌙";
-    }
-  } else {
-    body.classList.remove("light-theme");
-
-    if (themeToggle) {
-      themeToggle.textContent = "☀️";
-    }
-  }
-
-
-  if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-
-      body.classList.toggle("light-theme");
-
-      const lightMode =
-        body.classList.contains("light-theme");
-
-      themeToggle.textContent =
-        lightMode ? "🌙" : "☀️";
-
-      themeToggle.setAttribute(
-        "aria-label",
-        lightMode
-          ? "Switch to dark theme"
-          : "Switch to light theme"
-      );
-
-      localStorage.setItem(
-        "ismail-theme-mode",
-        lightMode ? "light" : "dark"
-      );
-
-    });
-  }
-
-
-  /* =========================
-     COLOR THEMES
-  ========================= */
-
-  const colorButtons =
-    document.querySelectorAll(".color-dot");
-
-  const savedColor =
-    localStorage.getItem("ismail-color-theme");
-
-  if (savedColor) {
-    body.setAttribute(
-      "data-theme",
-      savedColor
-    );
-  } else {
-    body.setAttribute(
-      "data-theme",
-      "blue"
-    );
-  }
-
-
-  colorButtons.forEach((button) => {
-
-    button.addEventListener("click", () => {
-
-      const selectedTheme =
-        button.dataset.theme;
-
-      if (!selectedTheme) return;
-
-      body.setAttribute(
-        "data-theme",
-        selectedTheme
-      );
-
-      localStorage.setItem(
-        "ismail-color-theme",
-        selectedTheme
-      );
-
-      showToast(
-        `${selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)} theme applied`
-      );
-
-    });
-
-  });
-
-
-  /* =========================
-     MOBILE MENU
-  ========================= */
-
-  if (menuButton && navLinks) {
-
-    menuButton.addEventListener("click", () => {
-
-      navLinks.classList.toggle("active");
-      menuButton.classList.toggle("active");
-
-      const opened =
-        navLinks.classList.contains("active");
-
-      menuButton.setAttribute(
-        "aria-expanded",
-        String(opened)
-      );
-
-      menuButton.setAttribute(
-        "aria-label",
-        opened
-          ? "Close menu"
-          : "Open menu"
-      );
-
+    window.addEventListener("load", () => {
+        setTimeout(() => {
+            loader.classList.add("hide");
+        }, 700);
     });
 
 
-    navLinks.querySelectorAll("a").forEach((link) => {
+    /* =====================================
+       MOBILE MENU
+    ===================================== */
 
-      link.addEventListener("click", () => {
+    const menuBtn = document.getElementById("menuBtn");
+    const navMenu = document.getElementById("navMenu");
 
-        navLinks.classList.remove("active");
-        menuButton.classList.remove("active");
+    if (menuBtn && navMenu) {
 
-        menuButton.setAttribute(
-          "aria-expanded",
-          "false"
-        );
+        menuBtn.addEventListener("click", () => {
 
-        menuButton.setAttribute(
-          "aria-label",
-          "Open menu"
-        );
+            navMenu.classList.toggle("show");
 
-      });
+            const icon = menuBtn.querySelector("i");
 
-    });
+            if (navMenu.classList.contains("show")) {
+                icon.classList.remove("fa-bars");
+                icon.classList.add("fa-xmark");
+            } else {
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
+            }
 
-  }
-
-
-  /* =========================
-     SMOOTH NAVIGATION
-  ========================= */
-
-  document
-    .querySelectorAll('a[href^="#"]')
-    .forEach((link) => {
-
-      link.addEventListener("click", (event) => {
-
-        const targetId =
-          link.getAttribute("href");
-
-        if (
-          !targetId ||
-          targetId === "#"
-        ) {
-          return;
-        }
-
-        const target =
-          document.querySelector(targetId);
-
-        if (!target) return;
-
-        event.preventDefault();
-
-        const navbarHeight =
-          navbar
-            ? navbar.offsetHeight
-            : 0;
-
-        const position =
-          target.getBoundingClientRect().top +
-          window.scrollY -
-          navbarHeight -
-          10;
-
-        window.scrollTo({
-          top: position,
-          behavior: "smooth"
         });
 
-      });
 
-    });
+        navMenu.querySelectorAll("a").forEach(link => {
 
+            link.addEventListener("click", () => {
 
-  /* =========================
-     LIVE DATE & TIME
-  ========================= */
+                navMenu.classList.remove("show");
 
-  function updateDateTime() {
+                const icon = menuBtn.querySelector("i");
 
-    if (!liveDateTime) return;
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
 
-    const now = new Date();
+            });
 
-    const date = now.toLocaleDateString(
-      "en-IN",
-      {
-        day: "2-digit",
-        month: "short",
-        year: "numeric"
-      }
-    );
-
-    const time = now.toLocaleTimeString(
-      "en-IN",
-      {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true
-      }
-    );
-
-    liveDateTime.textContent =
-      `${date} | ${time}`;
-
-  }
-
-  updateDateTime();
-
-  setInterval(
-    updateDateTime,
-    1000
-  );
-
-
-  /* =========================
-     SCROLL PROGRESS
-  ========================= */
-
-  function updateScroll() {
-
-    const scrollTop =
-      window.scrollY;
-
-    const pageHeight =
-      document.documentElement.scrollHeight -
-      window.innerHeight;
-
-    const percentage =
-      pageHeight > 0
-        ? (scrollTop / pageHeight) * 100
-        : 0;
-
-    if (scrollProgress) {
-      scrollProgress.style.width =
-        `${percentage}%`;
-    }
-
-
-    /* Navbar */
-
-    if (navbar) {
-
-      navbar.classList.toggle(
-        "scrolled",
-        scrollTop > 40
-      );
+        });
 
     }
 
 
-    /* Back to top */
+    /* =====================================
+       DARK / LIGHT MODE
+    ===================================== */
 
-    if (backToTop) {
+    const themeBtn = document.getElementById("themeBtn");
 
-      backToTop.classList.toggle(
-        "show",
-        scrollTop > 450
-      );
+    const savedTheme = localStorage.getItem("herbalTheme");
+
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark");
+    }
+
+    function updateThemeIcon() {
+
+        const icon = themeBtn.querySelector("i");
+
+        if (document.body.classList.contains("dark")) {
+
+            icon.classList.remove("fa-moon");
+            icon.classList.add("fa-sun");
+
+        } else {
+
+            icon.classList.remove("fa-sun");
+            icon.classList.add("fa-moon");
+
+        }
 
     }
 
-
-    updateActiveNavigation();
-
-  }
+    updateThemeIcon();
 
 
-  window.addEventListener(
-    "scroll",
-    updateScroll,
-    { passive: true }
-  );
+    themeBtn.addEventListener("click", () => {
 
-  updateScroll();
+        document.body.classList.toggle("dark");
 
+        const isDark = document.body.classList.contains("dark");
 
-  /* =========================
-     ACTIVE NAVIGATION
-  ========================= */
+        localStorage.setItem(
+            "herbalTheme",
+            isDark ? "dark" : "light"
+        );
 
-  function updateActiveNavigation() {
-
-    const sections =
-      document.querySelectorAll(
-        "section[id]"
-      );
-
-    const links =
-      document.querySelectorAll(
-        ".nav-links a"
-      );
-
-    let current =
-      "home";
-
-    sections.forEach((section) => {
-
-      const sectionTop =
-        section.offsetTop - 180;
-
-      if (
-        window.scrollY >= sectionTop
-      ) {
-        current =
-          section.id;
-      }
+        updateThemeIcon();
 
     });
 
 
-    links.forEach((link) => {
+    /* =====================================
+       DATE & TIME
+    ===================================== */
 
-      const href =
-        link.getAttribute("href");
+    const dateTime = document.getElementById("dateTime");
 
-      link.classList.toggle(
-        "active",
-        href === `#${current}`
-      );
+    function updateDateTime() {
 
-    });
+        const now = new Date();
 
-  }
+        const options = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        };
+
+        const date = now.toLocaleDateString(
+            "en-IN",
+            options
+        );
+
+        const time = now.toLocaleTimeString(
+            "en-IN",
+            {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit"
+            }
+        );
+
+        dateTime.textContent = `${date} • ${time}`;
+
+    }
+
+    updateDateTime();
+
+    setInterval(updateDateTime, 1000);
 
 
-  /* =========================
-     REVEAL ANIMATIONS
-  ========================= */
+    /* =====================================
+       YEAR
+    ===================================== */
 
-  const revealElements =
-    document.querySelectorAll(
-      ".reveal, .project-card, .gallery-item, " +
-      ".gallery-placeholder, .skill, .timeline-item"
-    );
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
 
 
-  if (
-    "IntersectionObserver" in window
-  ) {
+    /* =====================================
+       PLANT SEARCH
+    ===================================== */
 
-    const revealObserver =
-      new IntersectionObserver(
-        (entries, observer) => {
+    const searchInput =
+        document.getElementById("plantSearch");
 
-          entries.forEach((entry) => {
+    const clearSearch =
+        document.getElementById("clearSearch");
 
-            if (
-              entry.isIntersecting
-            ) {
+    const plantCards =
+        [...document.querySelectorAll(".plant-card")];
 
-              entry.target.classList.add(
-                "visible"
-              );
+    const noPlants =
+        document.getElementById("noPlants");
 
-              observer.unobserve(
-                entry.target
-              );
+
+    function filterPlants() {
+
+        const searchValue =
+            searchInput.value.toLowerCase().trim();
+
+        let visibleCount = 0;
+
+        plantCards.forEach(card => {
+
+            const name =
+                card.dataset.name.toLowerCase();
+
+            const isVisible =
+                name.includes(searchValue);
+
+            if (isVisible) {
+
+                card.style.display = "";
+
+                visibleCount++;
+
+            } else {
+
+                card.style.display = "none";
 
             }
 
-          });
-
-        },
-        {
-          threshold: 0.12
-        }
-      );
-
-
-    revealElements.forEach((element) => {
-
-      element.classList.add(
-        "reveal"
-      );
-
-      revealObserver.observe(
-        element
-      );
-
-    });
-
-  } else {
-
-    revealElements.forEach((element) => {
-
-      element.classList.add(
-        "visible"
-      );
-
-    });
-
-  }
-
-
-  /* =========================
-     PROFILE 3D EFFECT
-  ========================= */
-
-  const heroImage =
-    document.querySelector(
-      ".hero-image-wrapper"
-    );
-
-
-  if (
-    heroImage &&
-    window.matchMedia(
-      "(pointer: fine)"
-    ).matches
-  ) {
-
-    heroImage.addEventListener(
-      "mousemove",
-      (event) => {
-
-        const rect =
-          heroImage.getBoundingClientRect();
-
-        const x =
-          event.clientX -
-          rect.left;
-
-        const y =
-          event.clientY -
-          rect.top;
-
-        const centerX =
-          rect.width / 2;
-
-        const centerY =
-          rect.height / 2;
-
-        const rotateX =
-          ((y - centerY) /
-            centerY) *
-          -5;
-
-        const rotateY =
-          ((x - centerX) /
-            centerX) *
-          5;
-
-        heroImage.style.transform =
-          `perspective(800px)
-           rotateX(${rotateX}deg)
-           rotateY(${rotateY}deg)
-           translateZ(8px)`;
-
-      }
-    );
-
-
-    heroImage.addEventListener(
-      "mouseleave",
-      () => {
-
-        heroImage.style.transform =
-          "perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0)";
-
-      }
-    );
-
-  }
-
-
-  /* =========================
-     IMAGE GALLERY MODAL
-  ========================= */
-
-  const galleryImages =
-    document.querySelectorAll(
-      ".gallery-item img"
-    );
-
-
-  function openModal(image) {
-
-    if (
-      !imageModal ||
-      !modalImage
-    ) {
-      return;
-    }
-
-    modalImage.src =
-      image.src;
-
-    modalImage.alt =
-      image.alt || "Gallery image";
-
-    imageModal.classList.add(
-      "active"
-    );
-
-    body.classList.add(
-      "modal-open"
-    );
-
-  }
-
-
-  function closeModal() {
-
-    if (!imageModal) {
-      return;
-    }
-
-    imageModal.classList.remove(
-      "active"
-    );
-
-    body.classList.remove(
-      "modal-open"
-    );
-
-  }
-
-
-  galleryImages.forEach((image) => {
-
-    image.addEventListener(
-      "click",
-      () => {
-        openModal(image);
-      }
-    );
-
-  });
-
-
-  if (modalClose) {
-
-    modalClose.addEventListener(
-      "click",
-      closeModal
-    );
-
-  }
-
-
-  if (imageModal) {
-
-    imageModal.addEventListener(
-      "click",
-      (event) => {
-
-        if (
-          event.target === imageModal
-        ) {
-          closeModal();
-        }
-
-      }
-    );
-
-  }
-
-
-  document.addEventListener(
-    "keydown",
-    (event) => {
-
-      if (
-        event.key === "Escape"
-      ) {
-        closeModal();
-      }
-
-    }
-  );
-
-
-  /* =========================
-     BACK TO TOP
-  ========================= */
-
-  if (backToTop) {
-
-    backToTop.addEventListener(
-      "click",
-      () => {
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
         });
 
-      }
+
+        noPlants.style.display =
+            visibleCount === 0 ? "block" : "none";
+
+    }
+
+
+    searchInput.addEventListener(
+        "input",
+        filterPlants
     );
 
-  }
+
+    clearSearch.addEventListener("click", () => {
+
+        searchInput.value = "";
+
+        plantCards.forEach(card => {
+            card.style.display = "";
+        });
+
+        noPlants.style.display = "none";
+
+        document.querySelectorAll(".filter-btn")
+            .forEach(btn => btn.classList.remove("active"));
+
+        document
+            .querySelector('[data-filter="all"]')
+            .classList.add("active");
+
+    });
 
 
-  /* =========================
-     MUSIC PLAYER
-  ========================= */
+    /* =====================================
+       PLANT CATEGORY FILTER
+    ===================================== */
 
-  if (
-    musicButton &&
-    backgroundMusic
-  ) {
+    const filterButtons =
+        document.querySelectorAll(".filter-btn");
 
-    musicButton.addEventListener(
-      "click",
-      async () => {
+
+    filterButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            filterButtons.forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+            button.classList.add("active");
+
+            const filter =
+                button.dataset.filter;
+
+            let count = 0;
+
+            plantCards.forEach(card => {
+
+                if (
+                    filter === "all" ||
+                    card.dataset.type === filter
+                ) {
+
+                    card.style.display = "";
+
+                    count++;
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+            noPlants.style.display =
+                count === 0 ? "block" : "none";
+
+        });
+
+    });
+
+
+    /* =====================================
+       PLANT DETAILS
+    ===================================== */
+
+    const plantData = {
+
+        "Tulsi": {
+
+            icon: "🌿",
+
+            scientific: "Ocimum tenuiflorum",
+
+            about:
+                "Tulsi, also called Holy Basil, is a commonly grown herbal plant.",
+
+            uses:
+                "It has a long history of traditional use and is commonly valued in household practices.",
+
+            care:
+                "Tulsi generally needs sunlight, suitable soil and regular but controlled watering."
+
+        },
+
+
+        "Neem": {
+
+            icon: "🌳",
+
+            scientific: "Azadirachta indica",
+
+            about:
+                "Neem is a well-known tree found in many parts of India.",
+
+            uses:
+                "Neem has many traditional household and plant-care uses.",
+
+            care:
+                "Neem grows well in warm conditions and needs adequate sunlight."
+
+        },
+
+
+        "Aloe Vera": {
+
+            icon: "🪴",
+
+            scientific: "Aloe vera",
+
+            about:
+                "Aloe Vera is a succulent plant that stores water in its leaves.",
+
+            uses:
+                "The plant is traditionally used for skin-care and household purposes.",
+
+            care:
+                "Aloe Vera needs good sunlight and well-drained soil. Avoid excessive watering."
+
+        },
+
+
+        "Ginger": {
+
+            icon: "🌱",
+
+            scientific: "Zingiber officinale",
+
+            about:
+                "Ginger is a plant whose underground rhizome is widely used as a food ingredient.",
+
+            uses:
+                "Ginger is commonly used in cooking and traditional practices.",
+
+            care:
+                "Ginger grows well in warm conditions with moist, well-drained soil."
+
+        },
+
+
+        "Turmeric": {
+
+            icon: "🌱",
+
+            scientific: "Curcuma longa",
+
+            about:
+                "Turmeric is a plant known for its underground rhizome and bright yellow color.",
+
+            uses:
+                "It is widely used in cooking and traditional cultural practices.",
+
+            care:
+                "Turmeric grows well in warm conditions with suitable soil and regular moisture."
+
+        },
+
+
+        "Hibiscus": {
+
+            icon: "🌺",
+
+            scientific: "Hibiscus rosa-sinensis",
+
+            about:
+                "Hibiscus is a popular flowering plant commonly grown in gardens.",
+
+            uses:
+                "It has ornamental value and is also associated with traditional practices.",
+
+            care:
+                "Hibiscus generally benefits from sunlight, suitable soil and regular watering."
+
+        }
+
+    };
+
+
+    const plantModal =
+        document.getElementById("plantModal");
+
+    const closeModal =
+        document.getElementById("closeModal");
+
+    const modalIcon =
+        document.getElementById("modalIcon");
+
+    const modalTitle =
+        document.getElementById("modalTitle");
+
+    const modalScientific =
+        document.getElementById("modalScientific");
+
+    const modalAbout =
+        document.getElementById("modalAbout");
+
+    const modalUses =
+        document.getElementById("modalUses");
+
+    const modalCare =
+        document.getElementById("modalCare");
+
+
+    document.querySelectorAll(".plant-btn")
+        .forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const plantName =
+                    button.dataset.plant;
+
+                const plant =
+                    plantData[plantName];
+
+                if (!plant) return;
+
+                modalIcon.textContent =
+                    plant.icon;
+
+                modalTitle.textContent =
+                    plantName;
+
+                modalScientific.textContent =
+                    plant.scientific;
+
+                modalAbout.textContent =
+                    plant.about;
+
+                modalUses.textContent =
+                    plant.uses;
+
+                modalCare.textContent =
+                    plant.care;
+
+                plantModal.classList.add("show");
+
+                document.body.style.overflow =
+                    "hidden";
+
+            });
+
+        });
+
+
+    function closePlantModal() {
+
+        plantModal.classList.remove("show");
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    closeModal.addEventListener(
+        "click",
+        closePlantModal
+    );
+
+
+    plantModal.addEventListener("click", event => {
+
+        if (event.target === plantModal) {
+            closePlantModal();
+        }
+
+    });
+
+
+    document.addEventListener("keydown", event => {
+
+        if (
+            event.key === "Escape" &&
+            plantModal.classList.contains("show")
+        ) {
+            closePlantModal();
+        }
+
+    });
+
+
+    /* =====================================
+       QUIZ
+    ===================================== */
+
+    const quizQuestions = [
+
+        {
+            question:
+                "Which plant is commonly known as Holy Basil?",
+
+            answers: [
+                "Tulsi",
+                "Neem",
+                "Ginger",
+                "Hibiscus"
+            ],
+
+            correct: 0
+        },
+
+
+        {
+            question:
+                "Which part of ginger is commonly used?",
+
+            answers: [
+                "Flower",
+                "Rhizome",
+                "Leaf",
+                "Fruit"
+            ],
+
+            correct: 1
+        },
+
+
+        {
+            question:
+                "Which plant is a succulent?",
+
+            answers: [
+                "Aloe Vera",
+                "Neem",
+                "Turmeric",
+                "Hibiscus"
+            ],
+
+            correct: 0
+        },
+
+
+        {
+            question:
+                "What is an important reason to conserve herbal plants?",
+
+            answers: [
+                "To reduce biodiversity",
+                "To protect useful plant knowledge",
+                "To increase chemical use",
+                "To remove traditional knowledge"
+            ],
+
+            correct: 1
+        },
+
+
+        {
+            question:
+                "What should be encouraged instead of excessive chemical pesticides?",
+
+            answers: [
+                "Natural methods",
+                "More chemicals",
+                "No cultivation",
+                "Burning plants"
+            ],
+
+            correct: 0
+        }
+
+    ];
+
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+
+    const questionElement =
+        document.getElementById("question");
+
+    const answersElement =
+        document.getElementById("answers");
+
+    const nextButton =
+        document.getElementById("nextQuestion");
+
+    const questionNumber =
+        document.getElementById("questionNumber");
+
+    const scoreText =
+        document.getElementById("scoreText");
+
+    const quizProgress =
+        document.getElementById("quizProgress");
+
+    const quizResult =
+        document.getElementById("quizResult");
+
+
+    function loadQuestion() {
+
+        answered = false;
+
+        const question =
+            quizQuestions[currentQuestion];
+
+        questionElement.textContent =
+            question.question;
+
+        questionNumber.textContent =
+            `Question ${currentQuestion + 1} of ${quizQuestions.length}`;
+
+        scoreText.textContent =
+            `Score: ${score}`;
+
+        quizProgress.style.width =
+            `${((currentQuestion + 1) / quizQuestions.length) * 100}%`;
+
+        answersElement.innerHTML = "";
+
+        question.answers.forEach(
+            (answer, index) => {
+
+                const button =
+                    document.createElement("button");
+
+                button.className =
+                    "answer-btn";
+
+                button.textContent =
+                    answer;
+
+                button.addEventListener(
+                    "click",
+                    () => selectAnswer(button, index)
+                );
+
+                answersElement.appendChild(button);
+
+            }
+        );
+
+        nextButton.disabled = true;
+
+        nextButton.style.opacity = "0.5";
+
+        nextButton.textContent =
+            currentQuestion === quizQuestions.length - 1
+                ? "Finish Quiz"
+                : "Next Question";
+
+    }
+
+
+    function selectAnswer(button, selectedIndex) {
+
+        if (answered) return;
+
+        answered = true;
+
+        const question =
+            quizQuestions[currentQuestion];
+
+        const allButtons =
+            document.querySelectorAll(".answer-btn");
+
+
+        allButtons.forEach(
+            (btn, index) => {
+
+                btn.disabled = true;
+
+                if (index === question.correct) {
+                    btn.classList.add("correct");
+                }
+
+            }
+        );
+
+
+        if (selectedIndex === question.correct) {
+
+            button.classList.add("correct");
+
+            score++;
+
+            scoreText.textContent =
+                `Score: ${score}`;
+
+        } else {
+
+            button.classList.add("wrong");
+
+        }
+
+
+        nextButton.disabled = false;
+
+        nextButton.style.opacity = "1";
+
+    }
+
+
+    nextButton.addEventListener("click", () => {
+
+        if (!answered) return;
+
+        currentQuestion++;
+
+        if (
+            currentQuestion >=
+            quizQuestions.length
+        ) {
+
+            showQuizResult();
+
+        } else {
+
+            loadQuestion();
+
+        }
+
+    });
+
+
+    function showQuizResult() {
+
+        questionElement.textContent =
+            "🎉 Quiz Completed!";
+
+        answersElement.innerHTML = "";
+
+        questionNumber.textContent =
+            "Completed";
+
+        quizProgress.style.width =
+            "100%";
+
+        nextButton.textContent =
+            "Restart Quiz";
+
+        nextButton.disabled = false;
+
+        nextButton.style.opacity = "1";
+
+
+        const percentage =
+            Math.round(
+                (score / quizQuestions.length) * 100
+            );
+
+
+        if (percentage >= 80) {
+
+            quizResult.textContent =
+                `Excellent! You scored ${score}/${quizQuestions.length} (${percentage}%). 🌿`;
+
+        } else if (percentage >= 50) {
+
+            quizResult.textContent =
+                `Good job! You scored ${score}/${quizQuestions.length} (${percentage}%). 🌱`;
+
+        } else {
+
+            quizResult.textContent =
+                `Keep learning! You scored ${score}/${quizQuestions.length} (${percentage}%). 📚`;
+
+        }
+
+
+        nextButton.onclick = restartQuiz;
+
+    }
+
+
+    function restartQuiz() {
+
+        currentQuestion = 0;
+
+        score = 0;
+
+        quizResult.textContent = "";
+
+        nextButton.onclick = null;
+
+        loadQuestion();
+
+    }
+
+
+    loadQuestion();
+
+
+    /* =====================================
+       MUSIC PLAYER
+    ===================================== */
+
+    const music =
+        document.getElementById("backgroundMusic");
+
+    const musicBtn =
+        document.getElementById("musicBtn");
+
+    let musicPlaying = false;
+
+
+    musicBtn.addEventListener("click", async () => {
 
         try {
 
-          if (
-            backgroundMusic.paused
-          ) {
+            if (!musicPlaying) {
 
-            await backgroundMusic.play();
+                await music.play();
 
-            musicButton.textContent =
-              "❚❚";
+                musicPlaying = true;
 
-            musicButton.setAttribute(
-              "aria-label",
-              "Pause music"
-            );
+                musicBtn.textContent = "⏸️";
 
-            musicButton.setAttribute(
-              "title",
-              "Pause music"
-            );
+                musicBtn.classList.add("playing");
 
-            if (musicStatus) {
-              musicStatus.textContent =
-                "Playing";
+                musicBtn.title = "Pause music";
+
+            } else {
+
+                music.pause();
+
+                musicPlaying = false;
+
+                musicBtn.textContent = "🎵";
+
+                musicBtn.classList.remove("playing");
+
+                musicBtn.title = "Play music";
+
             }
-
-          } else {
-
-            backgroundMusic.pause();
-
-            musicButton.textContent =
-              "▶";
-
-            musicButton.setAttribute(
-              "aria-label",
-              "Play music"
-            );
-
-            musicButton.setAttribute(
-              "title",
-              "Play music"
-            );
-
-            if (musicStatus) {
-              musicStatus.textContent =
-                "Play";
-            }
-
-          }
 
         } catch (error) {
 
-          showToast(
-            "Tap the music button again to start."
-          );
-
-        }
-
-      }
-    );
-
-
-    backgroundMusic.addEventListener(
-      "ended",
-      () => {
-
-        musicButton.textContent =
-          "▶";
-
-        if (musicStatus) {
-          musicStatus.textContent =
-            "Play";
-        }
-
-      }
-    );
-
-  }
-
-
-  /* =========================
-     CONTACT FORM
-  ========================= */
-
-  if (contactForm) {
-
-    contactForm.addEventListener(
-      "submit",
-      (event) => {
-
-        event.preventDefault();
-
-        const name =
-          document.getElementById("name");
-
-        const email =
-          document.getElementById("email");
-
-        const message =
-          document.getElementById("message");
-
-
-        if (
-          !name ||
-          !email ||
-          !message
-        ) {
-          return;
-        }
-
-
-        const nameValue =
-          name.value.trim();
-
-        const emailValue =
-          email.value.trim();
-
-        const messageValue =
-          message.value.trim();
-
-
-        if (
-          !nameValue ||
-          !emailValue ||
-          !messageValue
-        ) {
-
-          showToast(
-            "Please fill in all fields."
-          );
-
-          return;
-
-        }
-
-
-        const emailPattern =
-          /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
-        if (
-          !emailPattern.test(
-            emailValue
-          )
-        ) {
-
-          showToast(
-            "Please enter a valid email."
-          );
-
-          email.focus();
-
-          return;
-
-        }
-
-
-        /*
-          This is a front-end form only.
-          It does not send an email automatically.
-        */
-
-        showToast(
-          "Message form submitted successfully!"
-        );
-
-        contactForm.reset();
-
-      }
-    );
-
-  }
-
-
-  /* =========================
-     TOAST
-  ========================= */
-
-  let toastTimer;
-
-
-  function showToast(message) {
-
-    if (!toast) return;
-
-    toast.textContent =
-      message;
-
-    toast.classList.add(
-      "show"
-    );
-
-    clearTimeout(
-      toastTimer
-    );
-
-    toastTimer =
-      setTimeout(() => {
-
-        toast.classList.remove(
-          "show"
-        );
-
-      }, 3000);
-
-  }
-
-
-  /* =========================
-     PARTICLES
-  ========================= */
-
-  const particlesContainer =
-    document.querySelector(
-      ".particles"
-    );
-
-
-  if (particlesContainer) {
-
-    const mobile =
-      window.innerWidth <= 650;
-
-    const particleCount =
-      mobile ? 18 : 35;
-
-
-    for (
-      let i = 0;
-      i < particleCount;
-      i++
-    ) {
-
-      const particle =
-        document.createElement(
-          "span"
-        );
-
-      particle.className =
-        "particle";
-
-      particle.style.left =
-        `${Math.random() * 100}%`;
-
-      particle.style.top =
-        `${Math.random() * 100}%`;
-
-      particle.style.animationDelay =
-        `${Math.random() * 6}s`;
-
-      particle.style.animationDuration =
-        `${5 + Math.random() * 6}s`;
-
-      particlesContainer.appendChild(
-        particle
-      );
-
-    }
-
-  }
-
-
-  /* =========================
-     BUTTON RIPPLE / CLICK
-  ========================= */
-
-  const interactiveButtons =
-    document.querySelectorAll(
-      ".btn, .theme-toggle, .music-button, " +
-      ".color-dot, .footer-social a"
-    );
-
-
-  interactiveButtons.forEach(
-    (button) => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          button.classList.add(
-            "clicked"
-          );
-
-          setTimeout(() => {
-
-            button.classList.remove(
-              "clicked"
+            alert(
+                "Please make sure music.mp3 is in the main project folder."
             );
 
-          }, 300);
-
-        }
-      );
-
-    }
-  );
-
-
-  /* =========================
-     PAGE VISIBILITY
-  ========================= */
-
-  document.addEventListener(
-    "visibilitychange",
-    () => {
-
-      if (
-        document.hidden &&
-        backgroundMusic &&
-        !backgroundMusic.paused
-      ) {
-
-        backgroundMusic.pause();
-
-        if (musicButton) {
-          musicButton.textContent =
-            "▶";
         }
 
-        if (musicStatus) {
-          musicStatus.textContent =
-            "Play";
+    });
+
+
+    /* =====================================
+       READ ALOUD
+    ===================================== */
+
+    const readBtn =
+        document.getElementById("readBtn");
+
+    let speaking = false;
+
+
+    readBtn.addEventListener("click", () => {
+
+        if (!("speechSynthesis" in window)) {
+
+            alert(
+                "Text-to-speech is not supported in this browser."
+            );
+
+            return;
+
         }
 
-      }
 
-    }
-  );
+        if (speaking) {
 
+            speechSynthesis.cancel();
 
-  /* =========================
-     INITIAL SETTINGS
-  ========================= */
+            speaking = false;
 
-  if (menuButton) {
+            readBtn.innerHTML =
+                '<i class="fa-solid fa-volume-high"></i>';
 
-    menuButton.setAttribute(
-      "aria-expanded",
-      "false"
-    );
+            return;
 
-  }
+        }
 
 
-  console.log(
-    "🚀 Ismail Developer Portfolio loaded successfully."
-  );
+        const main =
+            document.querySelector("main");
 
-});
+        const text =
+            main.innerText.substring(0, 7000);
+
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+        speech.rate = 0.95;
+
+        speech.pitch = 1;
+
+        speech.lang = "en-IN";
+
+
+        speech.onend = () => {
+
+            speaking = false;
+
+            readBtn.innerHTML =
+                '<i class="fa-solid fa-volume-high"></i>';
+
+        };
+
+
+        speechSynthesis.speak(speech);
+
+        speaking = true;
+
+        readBtn.innerHTML =
+            '<i class="fa-solid fa-stop"></i>';
+
+    });
+
+
+    /* =====================================
+       BACK TO TOP
+    ===================================== */
+
+    const backTop =
+        document.getElementById("backTop");
+
+
+    window.addEventListener("scroll", () => {
+
+        if (window.scrollY > 500) {
+
+            backTop.classList.add("show");
+
+        } else {
+
+            backTop.classList.remove("show");
+
+        }
+
+    });
+
+
+    backTop.addEventListener("click", () => {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+
+    /* =====================================
+       REVEAL ON SCROLL
+    ===================================== */
+
+    const revealElements =
+        document.querySelectorAll(
+            ".about-card, .plant-card, .benefit-card, .problem-card, .suggestion-i
