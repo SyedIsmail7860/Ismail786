@@ -1,13 +1,13 @@
-// ==========================================
-// HERBAL PLANTS CSP WEBSITE
-// FULL JAVASCRIPT
-// LOADING FEATURE REMOVED
-// ==========================================
+/* =========================================================
+   HERBAL PLANTS CSP
+   INTERACTIVE JAVASCRIPT
+   NO LOADING FEATURE
+   ========================================================= */
 
 
-// ==========================================
-// MOBILE MENU
-// ==========================================
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
 
 const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
@@ -17,7 +17,6 @@ if (menuBtn && navLinks) {
     menuBtn.addEventListener("click", () => {
 
         navLinks.classList.toggle("active");
-        menuBtn.classList.toggle("active");
 
     });
 
@@ -26,7 +25,6 @@ if (menuBtn && navLinks) {
         link.addEventListener("click", () => {
 
             navLinks.classList.remove("active");
-            menuBtn.classList.remove("active");
 
         });
 
@@ -35,20 +33,20 @@ if (menuBtn && navLinks) {
 }
 
 
-// ==========================================
-// DARK / LIGHT MODE
-// ==========================================
+/* =========================================================
+   DARK / LIGHT MODE
+   ========================================================= */
 
 const themeBtn = document.getElementById("themeBtn");
 
 if (themeBtn) {
 
-    const savedTheme =
-        localStorage.getItem("herbalTheme");
+    const savedTheme = localStorage.getItem("herbalTheme");
 
     if (savedTheme === "dark") {
 
         document.body.classList.add("dark-mode");
+
         themeBtn.textContent = "☀️";
 
     }
@@ -60,11 +58,13 @@ if (themeBtn) {
         if (document.body.classList.contains("dark-mode")) {
 
             localStorage.setItem("herbalTheme", "dark");
+
             themeBtn.textContent = "☀️";
 
         } else {
 
             localStorage.setItem("herbalTheme", "light");
+
             themeBtn.textContent = "🌙";
 
         }
@@ -74,35 +74,38 @@ if (themeBtn) {
 }
 
 
-// ==========================================
-// DATE AND TIME
-// ==========================================
+/* =========================================================
+   DATE & TIME
+   ========================================================= */
 
 function updateDateTime() {
 
-    const dateTime =
-        document.getElementById("dateTime");
+    const dateTime = document.getElementById("dateTime");
 
     if (!dateTime) return;
 
     const now = new Date();
 
-    const date =
-        now.toLocaleDateString("en-IN", {
+    const date = now.toLocaleDateString(
+        "en-IN",
+        {
             day: "2-digit",
             month: "short",
             year: "numeric"
-        });
+        }
+    );
 
-    const time =
-        now.toLocaleTimeString("en-IN", {
+    const time = now.toLocaleTimeString(
+        "en-IN",
+        {
             hour: "2-digit",
             minute: "2-digit",
             second: "2-digit"
-        });
+        }
+    );
 
-    dateTime.textContent =
-        `${date} | ${time}`;
+    dateTime.textContent = `${date} | ${time}`;
+
 }
 
 updateDateTime();
@@ -110,110 +113,128 @@ updateDateTime();
 setInterval(updateDateTime, 1000);
 
 
-// ==========================================
-// YEAR
-// ==========================================
+/* =========================================================
+   CURRENT YEAR
+   ========================================================= */
 
-const year =
-    document.getElementById("year");
+const year = document.getElementById("year");
 
 if (year) {
-    year.textContent =
-        new Date().getFullYear();
+
+    year.textContent = new Date().getFullYear();
+
 }
 
 
-// ==========================================
-// PLANT SEARCH
-// ==========================================
+/* =========================================================
+   PLANT SEARCH
+   ========================================================= */
 
-const plantSearch =
-    document.getElementById("plantSearch");
+const plantSearch = document.getElementById("plantSearch");
 
-const plantCards =
-    document.querySelectorAll(".plant-card");
+const plantCards = document.querySelectorAll(".plant-card");
+
+const noPlants = document.getElementById("noPlants");
+
+
+function filterPlants() {
+
+    if (!plantSearch) return;
+
+    const searchText =
+        plantSearch.value.toLowerCase().trim();
+
+    const activeButton =
+        document.querySelector(".filter-btn.active");
+
+    const selectedCategory =
+        activeButton
+            ? activeButton.dataset.category
+            : "all";
+
+    let visiblePlants = 0;
+
+    plantCards.forEach(card => {
+
+        const cardText =
+            card.textContent.toLowerCase();
+
+        const cardCategory =
+            card.dataset.category;
+
+        const matchesSearch =
+            cardText.includes(searchText);
+
+        const matchesCategory =
+            selectedCategory === "all" ||
+            cardCategory === selectedCategory;
+
+        if (matchesSearch && matchesCategory) {
+
+            card.style.display = "";
+
+            visiblePlants++;
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+
+    if (noPlants) {
+
+        noPlants.style.display =
+            visiblePlants === 0
+                ? "block"
+                : "none";
+
+    }
+
+}
 
 
 if (plantSearch) {
 
-    plantSearch.addEventListener("input", () => {
-
-        const search =
-            plantSearch.value
-                .toLowerCase()
-                .trim();
-
-        plantCards.forEach(card => {
-
-            const text =
-                card.textContent.toLowerCase();
-
-            if (text.includes(search)) {
-
-                card.style.display = "";
-
-            } else {
-
-                card.style.display = "none";
-
-            }
-
-        });
-
-    });
+    plantSearch.addEventListener(
+        "input",
+        filterPlants
+    );
 
 }
 
 
-// ==========================================
-// PLANT FILTER
-// ==========================================
+/* =========================================================
+   PLANT CATEGORY FILTER
+   ========================================================= */
 
 const filterButtons =
     document.querySelectorAll(".filter-btn");
-
 
 filterButtons.forEach(button => {
 
     button.addEventListener("click", () => {
 
         filterButtons.forEach(btn => {
+
             btn.classList.remove("active");
+
         });
 
         button.classList.add("active");
 
-        const category =
-            button.dataset.category;
-
-        plantCards.forEach(card => {
-
-            if (category === "all") {
-
-                card.style.display = "";
-
-            } else if (
-                card.dataset.category === category
-            ) {
-
-                card.style.display = "";
-
-            } else {
-
-                card.style.display = "none";
-
-            }
-
-        });
+        filterPlants();
 
     });
 
 });
 
 
-// ==========================================
-// PLANT DATA
-// ==========================================
+/* =========================================================
+   PLANT DATA
+   ========================================================= */
 
 const plantData = {
 
@@ -227,15 +248,20 @@ const plantData = {
         category:
             "Medicinal Plant",
 
-        emoji: "🌿",
+        emoji:
+            "🌿",
 
         description:
-            "Tulsi is a common medicinal plant traditionally used for health and wellness.",
+            "Tulsi is a common plant traditionally used in household wellness practices and herbal preparations.",
 
         benefits: [
-            "Traditionally used for respiratory support",
-            "Used in herbal drinks",
-            "Commonly grown in home gardens"
+
+            "Traditionally used in herbal drinks",
+
+            "Commonly grown in home gardens",
+
+            "Part of traditional wellness practices"
+
         ]
 
     },
@@ -251,15 +277,20 @@ const plantData = {
         category:
             "Medicinal Plant",
 
-        emoji: "🌳",
+        emoji:
+            "🌳",
 
         description:
-            "Neem is a useful tree known for its traditional medicinal and natural applications.",
+            "Neem is a useful tree known for its traditional applications and importance in natural practices.",
 
         benefits: [
-            "Traditionally used for skin care",
-            "Natural insect-repellent properties",
-            "Useful in traditional practices"
+
+            "Traditionally used in skin-care practices",
+
+            "Used in natural household practices",
+
+            "Useful tree for the environment"
+
         ]
 
     },
@@ -275,15 +306,20 @@ const plantData = {
         category:
             "Medicinal Plant",
 
-        emoji: "🌱",
+        emoji:
+            "🌱",
 
         description:
-            "Aloe Vera is a succulent plant widely used in traditional skin-care practices.",
+            "Aloe Vera is a succulent plant commonly used in traditional skin-care practices.",
 
         benefits: [
+
             "Commonly used for skin care",
+
             "Easy to grow at home",
+
             "Requires relatively little water"
+
         ]
 
     },
@@ -299,15 +335,20 @@ const plantData = {
         category:
             "Spice Plant",
 
-        emoji: "🫚",
+        emoji:
+            "🫚",
 
         description:
-            "Ginger is a spice and herbal plant commonly used in food and traditional remedies.",
+            "Ginger is a spice and herbal plant commonly used in food and traditional preparations.",
 
         benefits: [
+
             "Used in cooking",
+
             "Commonly used in herbal drinks",
-            "Traditionally used for digestion"
+
+            "Part of traditional food practices"
+
         ]
 
     },
@@ -323,15 +364,20 @@ const plantData = {
         category:
             "Spice Plant",
 
-        emoji: "🌱",
+        emoji:
+            "🌱",
 
         description:
             "Turmeric is a widely used spice and traditional herbal plant.",
 
         benefits: [
+
             "Used in cooking",
+
             "Contains curcumin",
+
             "Used in traditional practices"
+
         ]
 
     },
@@ -347,15 +393,78 @@ const plantData = {
         category:
             "Flowering Plant",
 
-        emoji: "🌺",
+        emoji:
+            "🌺",
 
         description:
             "Hibiscus is a flowering plant commonly grown in gardens and used in traditional practices.",
 
         benefits: [
+
             "Beautiful garden plant",
+
             "Used in traditional hair-care practices",
+
             "Supports biodiversity in gardens"
+
+        ]
+
+    },
+
+
+    mint: {
+
+        name: "Mint",
+
+        scientificName:
+            "Mentha",
+
+        category:
+            "Medicinal Plant",
+
+        emoji:
+            "🌱",
+
+        description:
+            "Mint is an aromatic herb commonly used in food, drinks and traditional preparations.",
+
+        benefits: [
+
+            "Used in food and drinks",
+
+            "Strong natural aroma",
+
+            "Can be grown in home gardens"
+
+        ]
+
+    },
+
+
+    lemongrass: {
+
+        name: "Lemongrass",
+
+        scientificName:
+            "Cymbopogon",
+
+        category:
+            "Medicinal Plant",
+
+        emoji:
+            "🌾",
+
+        description:
+            "Lemongrass is an aromatic plant commonly used in food, drinks and traditional preparations.",
+
+        benefits: [
+
+            "Used in herbal drinks",
+
+            "Has a pleasant aroma",
+
+            "Can be grown in suitable gardens"
+
         ]
 
     }
@@ -363,9 +472,9 @@ const plantData = {
 };
 
 
-// ==========================================
-// PLANT MODAL
-// ==========================================
+/* =========================================================
+   PLANT DETAILS MODAL
+   ========================================================= */
 
 const modal =
     document.getElementById("plantModal");
@@ -397,13 +506,14 @@ document.querySelectorAll(".view-plant")
 
         button.addEventListener("click", () => {
 
-            const id =
+            const plantId =
                 button.dataset.plant;
 
             const plant =
-                plantData[id];
+                plantData[plantId];
 
             if (!plant || !modal) return;
+
 
             modalName.textContent =
                 plant.name;
@@ -420,7 +530,9 @@ document.querySelectorAll(".view-plant")
             modalEmoji.textContent =
                 plant.emoji;
 
+
             modalBenefits.innerHTML = "";
+
 
             plant.benefits.forEach(benefit => {
 
@@ -433,6 +545,7 @@ document.querySelectorAll(".view-plant")
                 modalBenefits.appendChild(li);
 
             });
+
 
             modal.classList.add("show");
 
@@ -467,29 +580,43 @@ if (modalClose) {
 
 if (modal) {
 
-    modal.addEventListener("click", event => {
+    modal.addEventListener(
+        "click",
+        event => {
 
-        if (event.target === modal) {
-            closeModal();
+            if (event.target === modal) {
+
+                closeModal();
+
+            }
+
         }
-
-    });
+    );
 
 }
 
 
-document.addEventListener("keydown", event => {
+/* =========================================================
+   ESCAPE KEY
+   ========================================================= */
 
-    if (event.key === "Escape") {
-        closeModal();
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key === "Escape") {
+
+            closeModal();
+
+        }
+
     }
+);
 
-});
 
-
-// ==========================================
-// QUIZ
-// ==========================================
+/* =========================================================
+   INTERACTIVE QUIZ
+   ========================================================= */
 
 const quizQuestions = [
 
@@ -504,7 +631,8 @@ const quizQuestions = [
             "Wheat"
         ],
 
-        answer: "Tulsi"
+        answer:
+            "Tulsi"
     },
 
 
@@ -519,13 +647,14 @@ const quizQuestions = [
             "Sunflower"
         ],
 
-        answer: "Ginger"
+        answer:
+            "Ginger"
     },
 
 
     {
         question:
-            "Which plant is known for natural insect-repellent properties?",
+            "Which plant is known for traditional natural applications?",
 
         options: [
             "Neem",
@@ -534,13 +663,14 @@ const quizQuestions = [
             "Banana"
         ],
 
-        answer: "Neem"
+        answer:
+            "Neem"
     },
 
 
     {
         question:
-            "Which plant is commonly used in traditional skin care?",
+            "Which plant is commonly used in traditional skin-care practices?",
 
         options: [
             "Aloe Vera",
@@ -549,7 +679,8 @@ const quizQuestions = [
             "Corn"
         ],
 
-        answer: "Aloe Vera"
+        answer:
+            "Aloe Vera"
     },
 
 
@@ -564,7 +695,8 @@ const quizQuestions = [
             "Cardamom"
         ],
 
-        answer: "Turmeric"
+        answer:
+            "Turmeric"
     }
 
 ];
@@ -581,6 +713,7 @@ const quizRestart =
 
 
 let currentQuestion = 0;
+
 let quizScore = 0;
 
 
@@ -588,8 +721,10 @@ function loadQuizQuestion() {
 
     if (!quizContainer) return;
 
+
     const question =
         quizQuestions[currentQuestion];
+
 
     quizContainer.innerHTML = `
 
@@ -602,17 +737,18 @@ function loadQuizQuestion() {
 
             <div class="quiz-options">
 
-                ${question.options.map(option => `
-
-                    <button
-                        class="quiz-option"
-                        data-answer="${option}">
-
-                        ${option}
-
-                    </button>
-
-                `).join("")}
+                ${question.options
+                    .map(
+                        option => `
+                            <button
+                                class="quiz-option"
+                                data-answer="${option}"
+                            >
+                                ${option}
+                            </button>
+                        `
+                    )
+                    .join("")}
 
             </div>
 
@@ -621,16 +757,20 @@ function loadQuizQuestion() {
     `;
 
 
-    document.querySelectorAll(".quiz-option")
+    document
+        .querySelectorAll(".quiz-option")
         .forEach(option => {
 
-            option.addEventListener("click", () => {
+            option.addEventListener(
+                "click",
+                () => {
 
-                checkQuizAnswer(
-                    option.dataset.answer
-                );
+                    checkQuizAnswer(
+                        option.dataset.answer
+                    );
 
-            });
+                }
+            );
 
         });
 
@@ -648,7 +788,9 @@ function checkQuizAnswer(answer) {
 
     }
 
+
     currentQuestion++;
+
 
     if (
         currentQuestion <
@@ -669,8 +811,11 @@ function checkQuizAnswer(answer) {
 function showQuizResult() {
 
     if (quizContainer) {
+
         quizContainer.innerHTML = "";
+
     }
+
 
     if (quizResult) {
 
@@ -693,9 +838,12 @@ function showQuizResult() {
 
     }
 
+
     if (quizRestart) {
+
         quizRestart.style.display =
-            "inline-block";
+            "inline-flex";
+
     }
 
 }
@@ -703,37 +851,46 @@ function showQuizResult() {
 
 if (quizRestart) {
 
-    quizRestart.addEventListener("click", () => {
+    quizRestart.addEventListener(
+        "click",
+        () => {
 
-        currentQuestion = 0;
-        quizScore = 0;
+            currentQuestion = 0;
 
-        if (quizResult) {
+            quizScore = 0;
 
-            quizResult.classList.remove("show");
 
-            quizResult.innerHTML = "";
+            if (quizResult) {
+
+                quizResult.classList.remove("show");
+
+                quizResult.innerHTML = "";
+
+            }
+
+
+            quizRestart.style.display =
+                "none";
+
+
+            loadQuizQuestion();
 
         }
-
-        quizRestart.style.display =
-            "none";
-
-        loadQuizQuestion();
-
-    });
+    );
 
 }
 
 
 if (quizContainer) {
+
     loadQuizQuestion();
+
 }
 
 
-// ==========================================
-// MUSIC
-// ==========================================
+/* =========================================================
+   MUSIC BUTTON
+   ========================================================= */
 
 const music =
     document.getElementById("backgroundMusic");
@@ -741,135 +898,164 @@ const music =
 const musicBtn =
     document.getElementById("musicBtn");
 
+
 let musicPlaying = false;
 
 
 if (musicBtn && music) {
 
-    musicBtn.addEventListener("click", () => {
+    musicBtn.addEventListener(
+        "click",
+        () => {
 
-        if (musicPlaying) {
+            if (musicPlaying) {
 
-            music.pause();
+                music.pause();
 
-            musicBtn.textContent =
-                "🎵 Music";
+                musicBtn.textContent =
+                    "🎵 Music";
 
-            musicPlaying = false;
+                musicPlaying = false;
 
-        } else {
+            } else {
 
-            music.play()
-                .then(() => {
+                music.play()
+                    .then(() => {
 
-                    musicBtn.textContent =
-                        "⏸️ Pause";
+                        musicBtn.textContent =
+                            "⏸️ Pause";
 
-                    musicPlaying = true;
+                        musicPlaying = true;
 
-                })
-                .catch(() => {
+                    })
+                    .catch(() => {
 
-                    alert(
-                        "Please tap the music button again."
-                    );
+                        alert(
+                            "Please tap the music button again to start the music."
+                        );
 
-                });
+                    });
+
+            }
 
         }
-
-    });
+    );
 
 }
 
 
-// ==========================================
-// READ ALOUD
-// ==========================================
+/* =========================================================
+   READ ALOUD
+   ========================================================= */
 
-document.querySelectorAll(".read-aloud")
+document
+    .querySelectorAll(".read-btn")
     .forEach(button => {
 
-        button.addEventListener("click", () => {
+        button.addEventListener(
+            "click",
+            () => {
 
-            const target =
-                document.getElementById(
-                    button.dataset.target
+                const targetId =
+                    button.dataset.target;
+
+                const target =
+                    document.getElementById(targetId);
+
+                if (!target) return;
+
+
+                if (
+                    !("speechSynthesis" in window)
+                ) {
+
+                    alert(
+                        "Read Aloud is not supported on this device."
+                    );
+
+                    return;
+
+                }
+
+
+                window.speechSynthesis.cancel();
+
+
+                const speech =
+                    new SpeechSynthesisUtterance(
+                        target.innerText
+                    );
+
+
+                speech.lang = "en-IN";
+
+                speech.rate = 0.9;
+
+                speech.pitch = 1;
+
+
+                window.speechSynthesis.speak(
+                    speech
                 );
 
-            if (!target) return;
-
-            if (!("speechSynthesis" in window)) {
-
-                alert(
-                    "Read Aloud is not supported."
-                );
-
-                return;
             }
-
-            window.speechSynthesis.cancel();
-
-            const speech =
-                new SpeechSynthesisUtterance(
-                    target.innerText
-                );
-
-            speech.lang = "en-IN";
-            speech.rate = 0.9;
-            speech.pitch = 1;
-
-            window.speechSynthesis.speak(
-                speech
-            );
-
-        });
+        );
 
     });
 
 
-// ==========================================
-// BACK TO TOP
-// ==========================================
+/* =========================================================
+   BACK TO TOP
+   ========================================================= */
 
 const backToTop =
     document.getElementById("backToTop");
 
 
-window.addEventListener("scroll", () => {
+window.addEventListener(
+    "scroll",
+    () => {
 
-    if (!backToTop) return;
+        if (!backToTop) return;
 
-    if (window.scrollY > 400) {
 
-        backToTop.classList.add("show");
+        if (window.scrollY > 450) {
 
-    } else {
+            backToTop.classList.add("show");
 
-        backToTop.classList.remove("show");
+        } else {
+
+            backToTop.classList.remove("show");
+
+        }
 
     }
-
-});
+);
 
 
 if (backToTop) {
 
-    backToTop.addEventListener("click", () => {
+    backToTop.addEventListener(
+        "click",
+        () => {
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+            window.scrollTo({
 
-    });
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+        }
+    );
 
 }
 
 
-// ==========================================
-// SCROLL REVEAL
-// ==========================================
+/* =========================================================
+   SCROLL ANIMATIONS
+   ========================================================= */
 
 const revealElements =
     document.querySelectorAll(".reveal");
@@ -880,10 +1066,12 @@ function revealOnScroll() {
     const windowHeight =
         window.innerHeight;
 
+
     revealElements.forEach(element => {
 
         const elementTop =
             element.getBoundingClientRect().top;
+
 
         if (
             elementTop <
@@ -907,80 +1095,63 @@ window.addEventListener(
 revealOnScroll();
 
 
-// ==========================================
-// CTRL + K SEARCH
-// ==========================================
+/* =========================================================
+   CTRL + K SEARCH
+   ========================================================= */
 
-document.addEventListener("keydown", event => {
+document.addEventListener(
+    "keydown",
+    event => {
 
-    if (
-        (event.ctrlKey || event.metaKey) &&
-        event.key.toLowerCase() === "k"
-    ) {
+        if (
+            (event.ctrlKey || event.metaKey) &&
+            event.key.toLowerCase() === "k"
+        ) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        if (plantSearch) {
-            plantSearch.focus();
-        }
+            if (plantSearch) {
 
-    }
-
-});
-
-
-// ==========================================
-// SMOOTH SCROLL
-// ==========================================
-
-document.querySelectorAll(
-    'a[href^="#"]'
-).forEach(link => {
-
-    link.addEventListener(
-        "click",
-        event => {
-
-            const targetId =
-                link.getAttribute("href");
-
-            if (
-                targetId &&
-                targetId !== "#"
-            ) {
-
-                const target =
-                    document.querySelector(
-                        targetId
-                    );
-
-                if (target) {
-
-                    event.preventDefault();
-
-                    target.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
-
-                }
+                plantSearch.focus();
 
             }
 
         }
-    );
 
-});
-
-
-// ==========================================
-// WEBSITE MESSAGE
-// ==========================================
-
-console.log(
-    "🌿 Herbal Plants CSP Website loaded successfully!"
+    }
 );
 
-console.log(
-    "Loading screen has been removed."
-);
+
+/* =========================================================
+   SMOOTH NAVIGATION
+   ========================================================= */
+
+document
+    .querySelectorAll('a[href^="#"]')
+    .forEach(link => {
+
+        link.addEventListener(
+            "click",
+            event => {
+
+                const targetId =
+                    link.getAttribute("href");
+
+
+                if (
+                    targetId &&
+                    targetId !== "#"
+                ) {
+
+                    const target =
+                        document.querySelector(
+                            targetId
+                        );
+
+
+                    if (target) {
+
+                        event.preventDefault();
+
+
+          
