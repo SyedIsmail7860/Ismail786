@@ -1,964 +1,694 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Ismail | Developer Portfolio</title>
+    <title>Herbal Plants | CSP Project</title>
 
-  <meta
-    name="description"
-    content="Ismail - B.Tech CSE Student and Developer Portfolio"
-  >
+    <meta
+        name="description"
+        content="Herbal Plants Community Service Project - awareness, benefits, cultivation and conservation."
+    >
 
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 </head>
 
 <body>
 
-  <!-- =========================
-       BACKGROUND
-  ========================== -->
-  <div class="background-effects">
-    <div class="aurora"></div>
-    <div class="stars"></div>
-    <div class="particles"></div>
-    <div class="grid-background"></div>
-  </div>
-
-  <!-- Scroll Progress -->
-  <div id="scrollProgress"></div>
-
-
-  <!-- =========================
-       NAVBAR
-  ========================== -->
-  <header class="navbar" id="navbar">
-
-    <div class="nav-container">
-
-      <a href="#home" class="logo">
-        <span>Ismail</span>
-        <b>|</b>
-        <small>Developer Portfolio</small>
-      </a>
-
-      <button
-        class="menu-button"
-        id="menuButton"
-        type="button"
-        aria-label="Open menu"
-        aria-expanded="false"
-      >
-        ☰
-      </button>
-
-      <nav class="nav-links" id="navLinks">
-
-        <a href="#home" class="active">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#timeline">Timeline</a>
-        <a href="#projects">Projects</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#resume">Resume</a>
-        <a href="#contact">Contact</a>
-
-      </nav>
-
-      <div class="nav-actions">
-
-        <button
-          class="search-button"
-          type="button"
-          onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})"
-        >
-          🔍 <span>Search...</span>
-        </button>
-
-        <button
-          class="theme-toggle"
-          id="themeToggle"
-          type="button"
-          aria-label="Toggle theme"
-        >
-          ☀️
-        </button>
-
-      </div>
-
+    <!-- LOADER -->
+    <div id="loader">
+        <div class="loader-plant">🌿</div>
+        <h2>Herbal Plants</h2>
+        <p>Loading project...</p>
+        <div class="loader-line"></div>
     </div>
 
-  </header>
+
+    <!-- FLOATING LEAVES -->
+    <div class="floating-leaves">
+        <span>🍃</span>
+        <span>🌿</span>
+        <span>🍃</span>
+        <span>🌱</span>
+        <span>🍃</span>
+        <span>🌿</span>
+    </div>
 
 
-  <!-- =========================
-       HERO
-  ========================== -->
-  <main>
+    <!-- NAVBAR -->
+    <header class="navbar">
 
-    <section class="hero section" id="home">
-
-      <div class="hero-container">
-
-        <!-- Profile Image -->
-        <div class="hero-image-area">
-
-          <div class="hero-ring"></div>
-
-          <div class="hero-image-wrapper">
-
-            <img
-              src="ismail.jpg"
-              alt="Ismail"
-              class="hero-image"
-            >
-
-          </div>
-
+        <div class="logo">
+            <span>🌿</span>
+            Herbal Plants
         </div>
 
+        <button class="menu-btn" id="menuBtn">
+            <i class="fa-solid fa-bars"></i>
+        </button>
 
-        <!-- Hero Content -->
-        <div class="hero-content">
+        <nav id="navMenu">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#plants">Plants</a>
+            <a href="#problems">Problems</a>
+            <a href="#suggestions">Suggestions</a>
+            <a href="#learning">Learning</a>
+            <a href="#quiz">Quiz</a>
+        </nav>
 
-          <div class="developer-badge">
-            🚀 CSE Developer
-          </div>
-
-          <h1>
-            Hi, I'm
-            <span>Ismail</span>
-          </h1>
-
-          <h2>
-            B.Tech CSE Student | Viswam Engineering College
-          </h2>
-
-          <p>
-            I'm a passionate developer, currently pursuing B.Tech in
-            Computer Science & Engineering. I love working with Python,
-            SQL, Web Development and exploring modern technologies.
-          </p>
-
-
-          <div class="hero-buttons">
-
-            <a href="#projects" class="btn btn-primary">
-              View Projects
-              <span>→</span>
-            </a>
-
-            <a href="#contact" class="btn btn-outline">
-              ✉ Contact Me
-            </a>
-
-            <button
-              class="btn btn-outline"
-              type="button"
-              onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'})"
-            >
-              &lt;/&gt; Developer Mode
+        <div class="nav-actions">
+            <button id="themeBtn" title="Change theme">
+                <i class="fa-solid fa-moon"></i>
             </button>
 
-          </div>
-
+            <button id="readBtn" title="Read page">
+                <i class="fa-solid fa-volume-high"></i>
+            </button>
         </div>
 
-
-        <!-- Right Information Panel -->
-        <aside class="hero-panel">
-
-          <div class="live-time">
-
-            <div class="panel-title">
-              <span class="panel-icon">◷</span>
-              Live Date & Time
-            </div>
-
-            <div id="liveDateTime">
-              Loading...
-            </div>
-
-          </div>
+    </header>
 
 
-          <div class="theme-panel">
+    <!-- HERO -->
+    <main>
 
-            <h3>Theme Colors</h3>
+        <section id="home" class="hero">
 
-            <div class="theme-colors">
+            <div class="hero-content">
 
-              <button
-                class="color-dot cyan"
-                data-theme="cyan"
-                aria-label="Cyan theme"
-              ></button>
+                <div class="badge">
+                    🌱 Community Service Project
+                </div>
 
-              <button
-                class="color-dot blue"
-                data-theme="blue"
-                aria-label="Blue theme"
-              ></button>
+                <h1>
+                    Discover the World of
+                    <span>Herbal Plants</span>
+                </h1>
 
-              <button
-                class="color-dot purple"
-                data-theme="purple"
-                aria-label="Purple theme"
-              ></button>
+                <p>
+                    Learn about medicinal plants, their benefits,
+                    cultivation, conservation and importance in our community.
+                </p>
 
-              <button
-                class="color-dot green"
-                data-theme="green"
-                aria-label="Green theme"
-              ></button>
+                <div class="hero-buttons">
+                    <a href="#plants" class="primary-btn">
+                        Explore Plants <i class="fa-solid fa-arrow-down"></i>
+                    </a>
 
-              <button
-                class="color-dot pink"
-                data-theme="pink"
-                aria-label="Pink theme"
-              ></button>
+                    <a href="#quiz" class="secondary-btn">
+                        Take Quiz <i class="fa-solid fa-brain"></i>
+                    </a>
+                </div>
 
-              <button
-                class="color-dot rainbow"
-                data-theme="rainbow"
-                aria-label="Rainbow theme"
-              ></button>
+                <div class="live-info">
+                    <i class="fa-regular fa-clock"></i>
+                    <span id="dateTime">Loading date...</span>
+                </div>
 
             </div>
 
-          </div>
 
+            <div class="hero-visual">
 
-          <div class="music-panel">
+                <div class="plant-circle">
+                    <div class="big-leaf">🌿</div>
+                </div>
 
-            <h3>🎵 Background Music</h3>
+                <div class="info-bubble bubble-one">
+                    🌱 Natural
+                </div>
 
-            <div class="music-controls">
+                <div class="info-bubble bubble-two">
+                    💚 Healthy
+                </div>
 
-              <button
-                id="musicButton"
-                class="music-button"
-                type="button"
-                aria-label="Play music"
-                title="Play music"
-              >
-                ▶
-              </button>
-
-              <span id="musicStatus">Play</span>
-
-              <div class="music-line">
-                <span></span>
-              </div>
-
-              <span>🔊</span>
+                <div class="info-bubble bubble-three">
+                    🌍 Sustainable
+                </div>
 
             </div>
 
-          </div>
+        </section>
 
-        </aside>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         ABOUT + SKILLS
-    ========================== -->
-    <section class="section about-skills-section" id="about">
-
-      <div class="two-column">
 
         <!-- ABOUT -->
-        <article class="glass-card about-card reveal">
+        <section id="about" class="section">
 
-          <div class="card-heading">
-
-            <span class="heading-icon">👤</span>
-
-            <h2>About Me</h2>
-
-          </div>
-
-          <p>
-            I'm Ismail, a B.Tech CSE student at Viswam Engineering College.
-          </p>
-
-          <p>
-            I'm interested in Python, SQL, Web Development, Software
-            Development and modern technologies. I'm always eager to learn,
-            build and grow in the tech world.
-          </p>
-
-          <div class="education-info">
-
-            <span>📍</span>
-            <strong>Viswam Engineering College</strong>
-
-            <i>|</i>
-
-            <span>CSE (R24)</span>
-
-            <i>|</i>
-
-            <span>2024 - 2028</span>
-
-          </div>
-
-        </article>
-
-
-        <!-- SKILLS -->
-        <article class="glass-card skills-card reveal" id="skills">
-
-          <div class="card-heading">
-
-            <span class="heading-icon">♟</span>
-
-            <h2>Skills</h2>
-
-          </div>
-
-
-          <div class="skill">
-
-            <div class="skill-top">
-              <span>Python</span>
-              <span>75%</span>
+            <div class="section-title">
+                <span>01</span>
+                <h2>About Herbal Plants</h2>
+                <p>Understanding their importance</p>
             </div>
 
-            <div class="skill-bar">
-              <span style="width:75%"></span>
-            </div>
+            <div class="about-grid">
 
-          </div>
+                <div class="about-card main-about">
+                    <div class="card-icon">🌿</div>
 
+                    <h3>What are Herbal Plants?</h3>
 
-          <div class="skill">
+                    <p>
+                        Herbal plants are plants that can be used for
+                        traditional and medicinal purposes. They have been
+                        used by people for generations.
+                    </p>
 
-            <div class="skill-top">
-              <span>SQL</span>
-              <span>70%</span>
-            </div>
-
-            <div class="skill-bar">
-              <span style="width:70%"></span>
-            </div>
-
-          </div>
-
-
-          <div class="skill">
-
-            <div class="skill-top">
-              <span>HTML</span>
-              <span>85%</span>
-            </div>
-
-            <div class="skill-bar">
-              <span style="width:85%"></span>
-            </div>
-
-          </div>
+                    <p>
+                        Learning about these plants helps us understand
+                        their value and encourages their proper conservation.
+                    </p>
+                </div>
 
 
-          <div class="skill">
-
-            <div class="skill-top">
-              <span>CSS</span>
-              <span>75%</span>
-            </div>
-
-            <div class="skill-bar">
-              <span style="width:75%"></span>
-            </div>
-
-          </div>
+                <div class="about-card">
+                    <div class="card-icon">💊</div>
+                    <h3>Medicinal Value</h3>
+                    <p>
+                        Many herbal plants are traditionally used for
+                        different health and wellness purposes.
+                    </p>
+                </div>
 
 
-          <div class="skill">
-
-            <div class="skill-top">
-              <span>JavaScript</span>
-              <span>65%</span>
-            </div>
-
-            <div class="skill-bar">
-              <span style="width:65%"></span>
-            </div>
-
-          </div>
+                <div class="about-card">
+                    <div class="card-icon">🌍</div>
+                    <h3>Environmental Value</h3>
+                    <p>
+                        Plants support biodiversity and contribute to
+                        a healthy environment.
+                    </p>
+                </div>
 
 
-          <div class="skill">
-
-            <div class="skill-top">
-              <span>GitHub</span>
-              <span>80%</span>
-            </div>
-
-            <div class="skill-bar">
-              <span style="width:80%"></span>
-            </div>
-
-          </div>
-
-        </article>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         TIMELINE
-    ========================== -->
-    <section class="section" id="timeline">
-
-      <div class="glass-card timeline-card reveal">
-
-        <div class="card-heading">
-
-          <span class="heading-icon">◷</span>
-
-          <h2>Timeline</h2>
-
-        </div>
-
-
-        <div class="timeline">
-
-          <div class="timeline-item">
-
-            <div class="timeline-icon">
-              🎓
-            </div>
-
-            <div class="timeline-content">
-
-              <strong>2024</strong>
-
-              <h3>Started B.Tech CSE</h3>
-
-              <p>Viswam Engineering College</p>
+                <div class="about-card">
+                    <div class="card-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Community Value</h3>
+                    <p>
+                        Herbal plants can support community awareness,
+                        home gardening and traditional knowledge.
+                    </p>
+                </div>
 
             </div>
 
-          </div>
+        </section>
 
 
-          <div class="timeline-line"></div>
+        <!-- PLANT EXPLORER -->
+        <section id="plants" class="section plant-section">
 
-
-          <div class="timeline-item">
-
-            <div class="timeline-icon">
-              🐍
+            <div class="section-title">
+                <span>02</span>
+                <h2>Plant Explorer</h2>
+                <p>Search and explore selected herbal plants</p>
             </div>
 
-            <div class="timeline-content">
 
-              <strong>2025</strong>
+            <div class="search-box">
 
-              <h3>Learned Python</h3>
+                <i class="fa-solid fa-magnifying-glass"></i>
 
-              <p>Started coding journey</p>
+                <input
+                    type="text"
+                    id="plantSearch"
+                    placeholder="Search plant name..."
+                >
 
-            </div>
-
-          </div>
-
-
-          <div class="timeline-line"></div>
-
-
-          <div class="timeline-item">
-
-            <div class="timeline-icon">
-              🌐
-            </div>
-
-            <div class="timeline-content">
-
-              <strong>2026</strong>
-
-              <h3>Web Development</h3>
-
-              <p>Built real projects</p>
+                <button id="clearSearch">
+                    Clear
+                </button>
 
             </div>
 
-          </div>
 
+            <div class="plant-filters">
 
-          <div class="timeline-line"></div>
+                <button class="filter-btn active" data-filter="all">
+                    All
+                </button>
 
+                <button class="filter-btn" data-filter="leaf">
+                    🌿 Leaves
+                </button>
 
-          <div class="timeline-item">
+                <button class="filter-btn" data-filter="flower">
+                    🌸 Flowers
+                </button>
 
-            <div class="timeline-icon">
-              🎯
+                <button class="filter-btn" data-filter="root">
+                    🌱 Roots
+                </button>
+
             </div>
 
-            <div class="timeline-content">
 
-              <strong>Future</strong>
+            <div class="plant-grid" id="plantGrid">
 
-              <h3>Software Developer</h3>
+                <article
+                    class="plant-card"
+                    data-name="tulsi holy basil"
+                    data-type="leaf"
+                >
 
-              <p>Build a better tomorrow</p>
+                    <div class="plant-icon">🌿</div>
+
+                    <span class="plant-tag">Leaf</span>
+
+                    <h3>Tulsi</h3>
+
+                    <p class="scientific">
+                        Ocimum tenuiflorum
+                    </p>
+
+                    <p>
+                        Commonly known as Holy Basil and traditionally
+                        valued for its many uses.
+                    </p>
+
+                    <button
+                        class="plant-btn"
+                        data-plant="Tulsi"
+                    >
+                        View Details
+                    </button>
+
+                </article>
+
+
+                <article
+                    class="plant-card"
+                    data-name="neem"
+                    data-type="leaf"
+                >
+
+                    <div class="plant-icon">🌳</div>
+
+                    <span class="plant-tag">Leaf</span>
+
+                    <h3>Neem</h3>
+
+                    <p class="scientific">
+                        Azadirachta indica
+                    </p>
+
+                    <p>
+                        A traditional plant valued for its various
+                        household and medicinal uses.
+                    </p>
+
+                    <button
+                        class="plant-btn"
+                        data-plant="Neem"
+                    >
+                        View Details
+                    </button>
+
+                </article>
+
+
+                <article
+                    class="plant-card"
+                    data-name="aloe vera"
+                    data-type="leaf"
+                >
+
+                    <div class="plant-icon">🪴</div>
+
+                    <span class="plant-tag">Leaf</span>
+
+                    <h3>Aloe Vera</h3>
+
+                    <p class="scientific">
+                        Aloe vera
+                    </p>
+
+                    <p>
+                        A popular plant traditionally used for
+                        skin care and other household purposes.
+                    </p>
+
+                    <button
+                        class="plant-btn"
+                        data-plant="Aloe Vera"
+                    >
+                        View Details
+                    </button>
+
+                </article>
+
+
+                <article
+                    class="plant-card"
+                    data-name="ginger"
+                    data-type="root"
+                >
+
+                    <div class="plant-icon">🌱</div>
+
+                    <span class="plant-tag">Root</span>
+
+                    <h3>Ginger</h3>
+
+                    <p class="scientific">
+                        Zingiber officinale
+                    </p>
+
+                    <p>
+                        A commonly used plant valued as a food ingredient
+                        and in traditional practices.
+                    </p>
+
+                    <button
+                        class="plant-btn"
+                        data-plant="Ginger"
+                    >
+                        View Details
+                    </button>
+
+                </article>
+
+
+                <article
+                    class="plant-card"
+                    data-name="turmeric"
+                    data-type="root"
+                >
+
+                    <div class="plant-icon">🌱</div>
+
+                    <span class="plant-tag">Root</span>
+
+                    <h3>Turmeric</h3>
+
+                    <p class="scientific">
+                        Curcuma longa
+                    </p>
+
+                    <p>
+                        A widely used plant known for its traditional,
+                        culinary and cultural importance.
+                    </p>
+
+                    <button
+                        class="plant-btn"
+                        data-plant="Turmeric"
+                    >
+                        View Details
+                    </button>
+
+                </article>
+
+
+                <article
+                    class="plant-card"
+                    data-name="hibiscus"
+                    data-type="flower"
+                >
+
+                    <div class="plant-icon">🌺</div>
+
+                    <span class="plant-tag">Flower</span>
+
+                    <h3>Hibiscus</h3>
+
+                    <p class="scientific">
+                        Hibiscus rosa-sinensis
+                    </p>
+
+                    <p>
+                        A commonly grown flowering plant with traditional
+                        and ornamental value.
+                    </p>
+
+                    <button
+                        class="plant-btn"
+                        data-plant="Hibiscus"
+                    >
+                        View Details
+                    </button>
+
+                </article>
 
             </div>
 
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         PROJECTS
-    ========================== -->
-    <section class="section" id="projects">
-
-      <div class="section-header">
-
-        <div class="card-heading">
-
-          <span class="heading-icon">📁</span>
-
-          <h2>Projects</h2>
-
-        </div>
-
-        <a href="#projects">
-          View All Projects →
-        </a>
-
-      </div>
-
-
-      <div class="projects-grid">
-
-
-        <!-- Project 1 -->
-        <article class="project-card reveal">
-
-          <div class="project-image github-project">
-            <span>◉</span>
-          </div>
-
-          <div class="project-content">
-
-            <h3>My First GitHub Project</h3>
-
-            <p>
-              A simple project to learn GitHub and version control.
+            <p id="noPlants" class="no-results">
+                No plants found.
             </p>
 
-            <a
-              href="https://github.com/SyedIsmail7860"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View Project →
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- Project 2 -->
-        <article class="project-card reveal">
-
-          <div class="project-image shatter-project">
-            <img
-              src="ismail.jpg"
-              alt="Photo Shatter Effect"
-            >
-          </div>
-
-          <div class="project-content">
-
-            <h3>Photo Shatter Effect</h3>
-
-            <p>
-              A creative image effect using JavaScript and CSS.
-            </p>
-
-            <a href="#gallery">
-              View Project →
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- Project 3 -->
-        <article class="project-card reveal">
-
-          <div class="project-image gallery-project">
-            <span>🏔️</span>
-          </div>
-
-          <div class="project-content">
-
-            <h3>Gallery</h3>
-
-            <p>
-              A responsive image gallery with smooth UI.
-            </p>
-
-            <a href="#gallery">
-              View Project →
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- Project 4 -->
-        <article class="project-card reveal">
-
-          <div class="project-image python-project">
-            <span>🐍</span>
-          </div>
-
-          <div class="project-content">
-
-            <h3>Python Code Showcase</h3>
-
-            <p>
-              Sample Python codes with output and explanation.
-            </p>
-
-            <a href="#skills">
-              View Project →
-            </a>
-
-          </div>
-
-        </article>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         GALLERY
-    ========================== -->
-    <section class="section" id="gallery">
-
-      <div class="section-header">
-
-        <div class="card-heading">
-          <span class="heading-icon">🖼️</span>
-          <h2>Gallery</h2>
-        </div>
-
-      </div>
-
-
-      <div class="gallery-grid">
-
-        <div class="gallery-item reveal">
-          <img src="ismail.jpg" alt="Ismail">
-        </div>
-
-        <div class="gallery-placeholder reveal">
-          <span>+</span>
-          <p>Add Photo</p>
-        </div>
-
-        <div class="gallery-placeholder reveal">
-          <span>+</span>
-          <p>Add Photo</p>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         RESUME
-    ========================== -->
-    <section class="section" id="resume">
-
-      <div class="resume-card glass-card reveal">
-
-        <div>
-          <span class="resume-icon">📄</span>
-
-          <h2>My Resume</h2>
-
-          <p>
-            View or download my latest resume.
-          </p>
-        </div>
-
-        <div class="resume-buttons">
-
-          <a
-            href="resume.pdf"
-            target="_blank"
-            class="btn btn-outline"
-          >
-            View Resume
-          </a>
-
-          <a
-            href="resume.pdf"
-            download
-            class="btn btn-primary"
-          >
-            Download Resume
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         CTA
-    ========================== -->
-    <section class="section">
-
-      <div class="cta glass-card reveal">
-
-        <div class="cta-icon">
-          &lt;/&gt;
-        </div>
-
-        <div class="cta-text">
-
-          <h2>Let's Build Something Great</h2>
-
-          <p>
-            I'm always open to new opportunities and exciting projects.
-          </p>
-
-        </div>
-
-        <a href="#projects" class="btn btn-primary">
-          View Projects →
-        </a>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         CONTACT
-    ========================== -->
-    <section class="section contact-section" id="contact">
-
-      <div class="section-header">
-
-        <div class="card-heading">
-
-          <span class="heading-icon">✉</span>
-
-          <h2>Contact Me</h2>
-
-        </div>
-
-      </div>
-
-
-      <div class="contact-grid">
-
-        <div class="glass-card contact-info">
-
-          <h3>Let's Connect</h3>
-
-          <p>
-            Feel free to contact me for projects, collaboration,
-            or development opportunities.
-          </p>
-
-          <div class="contact-item">
-            📧
-            <span>ismailgkd123@gmail.com</span>
-          </div>
-
-          <div class="contact-item">
-            💻
-            <span>github.com/SyedIsmail7860</span>
-          </div>
-
-          <div class="contact-item">
-            📍
-            <span>Andhra Pradesh, India</span>
-          </div>
-
-        </div>
-
-
-        <form class="glass-card contact-form" id="contactForm">
-
-          <input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Your Name"
-            required
-          >
-
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Your Email"
-            required
-          >
-
-          <textarea
-            name="message"
-            id="message"
-            rows="5"
-            placeholder="Your Message"
-            required
-          ></textarea>
-
-          <button
-            type="submit"
-            class="btn btn-primary"
-          >
-            Send Message →
-          </button>
-
-        </form>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- =========================
-       FOOTER
-  ========================== -->
-  <footer class="footer">
-
-    <div class="footer-left">
-
-      <strong>Ismail</strong>
-
-      <span>|</span>
-
-      <span>Developer Portfolio</span>
-
-    </div>
-
-
-    <div class="footer-social">
-
-      <a
-        href="https://github.com/SyedIsmail7860"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="GitHub"
-      >
-        ◉
-      </a>
-
-      <a
-        href="https://www.linkedin.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="LinkedIn"
-      >
-        in
-      </a>
-
-      <a
-        href="mailto:ismailgkd123@gmail.com"
-        aria-label="Email"
-      >
-        ✉
-      </a>
-
-    </div>
-
-
-    <a href="#home" class="back-top">
-      Back to Top ↑
-    </a>
-
-  </footer>
-
-
-  <!-- =========================
-       IMAGE MODAL
-  ========================== -->
-  <div class="image-modal" id="imageModal">
-
-    <button
-      id="modalClose"
-      class="modal-close"
-      type="button"
-      aria-label="Close image"
-    >
-      ×
-    </button>
-
-    <img
-      id="modalImage"
-      src=""
-      alt="Preview"
-    >
-
-  </div>
-
-
-  <!-- =========================
-       TOAST
-  ========================== -->
-  <div class="toast" id="toast"></div>
-
-
-  <!-- =========================
-       MUSIC
-  ========================== -->
-  <audio
-    id="backgroundMusic"
-    src="music.mp3"
-    loop
-    preload="metadata"
-  ></audio>
-
-
-  <!-- =========================
-       BACK TO TOP BUTTON
-  ========================== -->
-  <button
-    class="back-to-top"
-    id="backToTop"
-    type="button"
-    aria-label="Back to top"
-  >
-    ↑
-  </button>
-
-
-  <!-- JavaScript -->
-  <script src="src/app.js"></script>
-
-</body>
-</html>
+        </section>
+
+
+        <!-- BENEFITS -->
+        <section class="section">
+
+            <div class="section-title">
+                <span>03</span>
+                <h2>Key Benefits</h2>
+                <p>Why herbal plants are important</p>
+            </div>
+
+            <div class="benefit-grid">
+
+                <div class="benefit-card">
+                    <div>💊</div>
+                    <h3>Medicinal Knowledge</h3>
+                    <p>
+                        Helps us learn about traditional uses of plants.
+                    </p>
+                </div>
+
+                <div class="benefit-card">
+                    <div>🌱</div>
+                    <h3>Home Gardening</h3>
+                    <p>
+                        Encourages people to grow useful plants at home.
+                    </p>
+                </div>
+
+                <div class="benefit-card">
+                    <div>🌍</div>
+                    <h3>Conservation</h3>
+                    <p>
+                        Helps protect plant diversity and traditional knowledge.
+                    </p>
+                </div>
+
+                <div class="benefit-card">
+                    <div>👥</div>
+                    <h3>Community Awareness</h3>
+                    <p>
+                        Helps people understand the importance of herbal plants.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROBLEMS -->
+        <section id="problems" class="section dark-section">
+
+            <div class="section-title">
+                <span>04</span>
+                <h2>Problems & Challenges</h2>
+                <p>Important issues identified during our study</p>
+            </div>
+
+            <div class="problem-grid">
+
+                <div class="problem-card">
+                    <span>01</span>
+                    <div class="problem-icon">💡</div>
+                    <h3>Lack of Awareness</h3>
+                    <p>
+                        Many people do not know the importance and
+                        medicinal uses of herbal plants.
+                    </p>
+                </div>
+
+                <div class="problem-card">
+                    <span>02</span>
+                    <div class="problem-icon">🧪</div>
+                    <h3>Chemical Pesticides</h3>
+                    <p>
+                        Excessive chemical pesticides can harm soil,
+                        biodiversity and the environment.
+                    </p>
+                </div>
+
+                <div class="problem-card">
+                    <span>03</span>
+                    <div class="problem-icon">🌱</div>
+                    <h3>Limited Availability</h3>
+                    <p>
+                        Some useful herbal plants are not easily
+                        available in every area.
+                    </p>
+                </div>
+
+                <div class="problem-card">
+                    <span>04</span>
+                    <div class="problem-icon">👨‍🏫</div>
+                    <h3>Need for Guidance</h3>
+                    <p>
+                        Proper guidance is important for correct
+                        identification and safe use.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SUGGESTIONS -->
+        <section id="suggestions" class="section">
+
+            <div class="section-title">
+                <span>05</span>
+                <h2>Suggestions & Recommendations</h2>
+                <p>Simple steps for a better future</p>
+            </div>
+
+            <div class="suggestion-list">
+
+                <div class="suggestion-item">
+                    <div class="suggestion-number">01</div>
+                    <div>
+                        <h3>Increase Awareness</h3>
+                        <p>
+                            Create awareness about the medicinal value
+                            and conservation of herbal plants.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="suggestion-item">
+                    <div class="suggestion-number">02</div>
+                    <div>
+                        <h3>Promote Cultivation</h3>
+                        <p>
+                            Encourage sustainable cultivation and
+                            home gardening.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="suggestion-item">
+                    <div class="suggestion-number">03</div>
+                    <div>
+                        <h3>Reduce Chemicals</h3>
+                        <p>
+                            Reduce chemical pesticides and encourage
+                            natural methods.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="suggestion-item">
+                    <div class="suggestion-number">04</div>
+                    <div>
+                        <h3>Expert Guidance</h3>
+                        <p>
+                            Provide proper training and support from
+                            experts and institutions.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LEARNING -->
+        <section id="learning" class="section learning-section">
+
+            <div class="section-title">
+                <span>06</span>
+                <h2>Student Learning</h2>
+                <p>What we learned through the project</p>
+            </div>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">01</div>
+                    <div class="timeline-content">
+                        <h3>Plant Identification</h3>
+                        <p>
+                            Identified selected herbal plants during the study.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">02</div>
+                    <div class="timeline-content">
+                        <h3>Scientific Names & Uses</h3>
+                        <p>
+                            Learned scientific names and common uses.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">03</div>
+                    <div class="timeline-content">
+                        <h3>Cultivation Methods</h3>
+                        <p>
+                            Understood basic cultivation methods.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">04</div>
+                    <div class="timeline-content">
+                        <h3>Observation & Documentation</h3>
+                        <p>
+                            Improved observation and documentation skills.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">05</div>
+                    <div class="timeline-content">
+                        <h3>Community Needs</h3>
+                        <p>
+                            Learned how plants can support community needs.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUIZ -->
+        <section id="quiz" class="section quiz-section">
+
+            <div class="section-title">
+                <span>07</span>
+                <h2>Herbal Plants Quiz</h2>
+                <p>Test your knowledge</p>
+            </div>
+
+            <div class="quiz-box">
+
+                <div class="quiz-top">
+                    <span id="questionNumber">
+                        Question 1 of 5
+                    </span>
+
+           
