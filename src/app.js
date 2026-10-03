@@ -1,7 +1,7 @@
 // ==========================================
 // HERBAL PLANTS CSP WEBSITE
-// Interactive JavaScript
-// Loading feature removed
+// FULL JAVASCRIPT
+// LOADING FEATURE REMOVED
 // ==========================================
 
 
@@ -13,17 +13,25 @@ const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
 
 if (menuBtn && navLinks) {
+
     menuBtn.addEventListener("click", () => {
+
         navLinks.classList.toggle("active");
         menuBtn.classList.toggle("active");
+
     });
 
     document.querySelectorAll(".nav-links a").forEach(link => {
+
         link.addEventListener("click", () => {
+
             navLinks.classList.remove("active");
             menuBtn.classList.remove("active");
+
         });
+
     });
+
 }
 
 
@@ -34,65 +42,84 @@ if (menuBtn && navLinks) {
 const themeBtn = document.getElementById("themeBtn");
 
 if (themeBtn) {
-    const savedTheme = localStorage.getItem("herbalTheme");
+
+    const savedTheme =
+        localStorage.getItem("herbalTheme");
 
     if (savedTheme === "dark") {
+
         document.body.classList.add("dark-mode");
         themeBtn.textContent = "☀️";
+
     }
 
     themeBtn.addEventListener("click", () => {
+
         document.body.classList.toggle("dark-mode");
 
         if (document.body.classList.contains("dark-mode")) {
+
             localStorage.setItem("herbalTheme", "dark");
             themeBtn.textContent = "☀️";
+
         } else {
+
             localStorage.setItem("herbalTheme", "light");
             themeBtn.textContent = "🌙";
+
         }
+
     });
+
 }
 
 
 // ==========================================
-// LIVE DATE & TIME
+// DATE AND TIME
 // ==========================================
 
 function updateDateTime() {
-    const dateTimeElement = document.getElementById("dateTime");
 
-    if (!dateTimeElement) return;
+    const dateTime =
+        document.getElementById("dateTime");
+
+    if (!dateTime) return;
 
     const now = new Date();
 
-    const date = now.toLocaleDateString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric"
-    });
+    const date =
+        now.toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        });
 
-    const time = now.toLocaleTimeString("en-IN", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit"
-    });
+    const time =
+        now.toLocaleTimeString("en-IN", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+        });
 
-    dateTimeElement.textContent = `${date} | ${time}`;
+    dateTime.textContent =
+        `${date} | ${time}`;
 }
 
 updateDateTime();
+
 setInterval(updateDateTime, 1000);
 
 
 // ==========================================
-// CURRENT YEAR
+// YEAR
 // ==========================================
 
-const yearElement = document.getElementById("year");
+const year =
+    document.getElementById("year");
 
-if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
+if (year) {
+    year.textContent =
+        new Date().getFullYear();
 }
 
 
@@ -100,40 +127,54 @@ if (yearElement) {
 // PLANT SEARCH
 // ==========================================
 
-const plantSearch = document.getElementById("plantSearch");
-const plantCards = document.querySelectorAll(".plant-card");
+const plantSearch =
+    document.getElementById("plantSearch");
+
+const plantCards =
+    document.querySelectorAll(".plant-card");
+
 
 if (plantSearch) {
+
     plantSearch.addEventListener("input", () => {
-        const searchValue = plantSearch.value.toLowerCase().trim();
+
+        const search =
+            plantSearch.value
+                .toLowerCase()
+                .trim();
 
         plantCards.forEach(card => {
-            const plantName =
-                card.querySelector("h3")?.textContent.toLowerCase() || "";
 
-            const plantText =
+            const text =
                 card.textContent.toLowerCase();
 
-            if (
-                plantName.includes(searchValue) ||
-                plantText.includes(searchValue)
-            ) {
+            if (text.includes(search)) {
+
                 card.style.display = "";
+
             } else {
+
                 card.style.display = "none";
+
             }
+
         });
+
     });
+
 }
 
 
 // ==========================================
-// PLANT CATEGORY FILTER
+// PLANT FILTER
 // ==========================================
 
-const filterButtons = document.querySelectorAll(".filter-btn");
+const filterButtons =
+    document.querySelectorAll(".filter-btn");
+
 
 filterButtons.forEach(button => {
+
     button.addEventListener("click", () => {
 
         filterButtons.forEach(btn => {
@@ -142,24 +183,31 @@ filterButtons.forEach(button => {
 
         button.classList.add("active");
 
-        const category = button.dataset.category;
+        const category =
+            button.dataset.category;
 
         plantCards.forEach(card => {
 
             if (category === "all") {
-                card.style.display = "";
-                return;
-            }
 
-            const cardCategory = card.dataset.category;
-
-            if (cardCategory === category) {
                 card.style.display = "";
+
+            } else if (
+                card.dataset.category === category
+            ) {
+
+                card.style.display = "";
+
             } else {
+
                 card.style.display = "none";
+
             }
+
         });
+
     });
+
 });
 
 
@@ -170,161 +218,250 @@ filterButtons.forEach(button => {
 const plantData = {
 
     tulsi: {
+
         name: "Tulsi",
-        scientificName: "Ocimum tenuiflorum",
-        category: "Medicinal Plant",
+
+        scientificName:
+            "Ocimum tenuiflorum",
+
+        category:
+            "Medicinal Plant",
+
         emoji: "🌿",
+
         description:
             "Tulsi is a common medicinal plant traditionally used for health and wellness.",
+
         benefits: [
             "Traditionally used for respiratory support",
             "Used in herbal drinks",
             "Commonly grown in home gardens"
         ]
+
     },
 
+
     neem: {
+
         name: "Neem",
-        scientificName: "Azadirachta indica",
-        category: "Medicinal Plant",
+
+        scientificName:
+            "Azadirachta indica",
+
+        category:
+            "Medicinal Plant",
+
         emoji: "🌳",
+
         description:
             "Neem is a useful tree known for its traditional medicinal and natural applications.",
+
         benefits: [
             "Traditionally used for skin care",
             "Natural insect-repellent properties",
             "Useful in traditional practices"
         ]
+
     },
 
+
     aloe: {
+
         name: "Aloe Vera",
-        scientificName: "Aloe barbadensis miller",
-        category: "Medicinal Plant",
+
+        scientificName:
+            "Aloe barbadensis miller",
+
+        category:
+            "Medicinal Plant",
+
         emoji: "🌱",
+
         description:
             "Aloe Vera is a succulent plant widely used in traditional skin-care practices.",
+
         benefits: [
             "Commonly used for skin care",
             "Easy to grow at home",
             "Requires relatively little water"
         ]
+
     },
 
+
     ginger: {
+
         name: "Ginger",
-        scientificName: "Zingiber officinale",
-        category: "Spice Plant",
+
+        scientificName:
+            "Zingiber officinale",
+
+        category:
+            "Spice Plant",
+
         emoji: "🫚",
+
         description:
             "Ginger is a spice and herbal plant commonly used in food and traditional remedies.",
+
         benefits: [
             "Used in cooking",
             "Commonly used in herbal drinks",
             "Traditionally used for digestion"
         ]
+
     },
 
+
     turmeric: {
+
         name: "Turmeric",
-        scientificName: "Curcuma longa",
-        category: "Spice Plant",
+
+        scientificName:
+            "Curcuma longa",
+
+        category:
+            "Spice Plant",
+
         emoji: "🌱",
+
         description:
             "Turmeric is a widely used spice and traditional herbal plant.",
+
         benefits: [
             "Used in cooking",
             "Contains curcumin",
             "Used in traditional practices"
         ]
+
     },
 
+
     hibiscus: {
+
         name: "Hibiscus",
-        scientificName: "Hibiscus rosa-sinensis",
-        category: "Flowering Plant",
+
+        scientificName:
+            "Hibiscus rosa-sinensis",
+
+        category:
+            "Flowering Plant",
+
         emoji: "🌺",
+
         description:
             "Hibiscus is a flowering plant commonly grown in gardens and used in traditional practices.",
+
         benefits: [
             "Beautiful garden plant",
             "Used in traditional hair-care practices",
             "Supports biodiversity in gardens"
         ]
+
     }
 
 };
 
 
 // ==========================================
-// PLANT DETAILS MODAL
+// PLANT MODAL
 // ==========================================
 
-const modal = document.getElementById("plantModal");
-const modalClose = document.getElementById("modalClose");
+const modal =
+    document.getElementById("plantModal");
 
-const modalName = document.getElementById("modalName");
-const modalScientific = document.getElementById("modalScientific");
-const modalCategory = document.getElementById("modalCategory");
-const modalDescription = document.getElementById("modalDescription");
-const modalBenefits = document.getElementById("modalBenefits");
-const modalEmoji = document.getElementById("modalEmoji");
+const modalClose =
+    document.getElementById("modalClose");
 
-const viewButtons = document.querySelectorAll(".view-plant");
+const modalName =
+    document.getElementById("modalName");
+
+const modalScientific =
+    document.getElementById("modalScientific");
+
+const modalCategory =
+    document.getElementById("modalCategory");
+
+const modalDescription =
+    document.getElementById("modalDescription");
+
+const modalBenefits =
+    document.getElementById("modalBenefits");
+
+const modalEmoji =
+    document.getElementById("modalEmoji");
 
 
-viewButtons.forEach(button => {
+document.querySelectorAll(".view-plant")
+    .forEach(button => {
 
-    button.addEventListener("click", () => {
+        button.addEventListener("click", () => {
 
-        const plantId = button.dataset.plant;
-        const plant = plantData[plantId];
+            const id =
+                button.dataset.plant;
 
-        if (!plant || !modal) return;
+            const plant =
+                plantData[id];
 
-        if (modalName) {
-            modalName.textContent = plant.name;
-        }
+            if (!plant || !modal) return;
 
-        if (modalScientific) {
+            modalName.textContent =
+                plant.name;
+
             modalScientific.textContent =
                 `Scientific Name: ${plant.scientificName}`;
-        }
 
-        if (modalCategory) {
-            modalCategory.textContent = plant.category;
-        }
+            modalCategory.textContent =
+                plant.category;
 
-        if (modalDescription) {
-            modalDescription.textContent = plant.description;
-        }
+            modalDescription.textContent =
+                plant.description;
 
-        if (modalEmoji) {
-            modalEmoji.textContent = plant.emoji;
-        }
-
-        if (modalBenefits) {
+            modalEmoji.textContent =
+                plant.emoji;
 
             modalBenefits.innerHTML = "";
 
             plant.benefits.forEach(benefit => {
 
-                const li = document.createElement("li");
+                const li =
+                    document.createElement("li");
 
-                li.textContent = benefit;
+                li.textContent =
+                    benefit;
 
                 modalBenefits.appendChild(li);
-            });
-        }
 
-        modal.classList.add("show");
-        document.body.style.overflow = "hidden";
+            });
+
+            modal.classList.add("show");
+
+            document.body.style.overflow =
+                "hidden";
+
+        });
+
     });
-});
+
+
+function closeModal() {
+
+    if (!modal) return;
+
+    modal.classList.remove("show");
+
+    document.body.style.overflow = "";
+
+}
 
 
 if (modalClose) {
-    modalClose.addEventListener("click", closeModal);
+
+    modalClose.addEventListener(
+        "click",
+        closeModal
+    );
+
 }
 
 
@@ -337,6 +474,7 @@ if (modal) {
         }
 
     });
+
 }
 
 
@@ -349,56 +487,98 @@ document.addEventListener("keydown", event => {
 });
 
 
-function closeModal() {
-
-    if (!modal) return;
-
-    modal.classList.remove("show");
-
-    document.body.style.overflow = "";
-}
-
-
 // ==========================================
-// HERBAL PLANTS QUIZ
+// QUIZ
 // ==========================================
 
 const quizQuestions = [
+
     {
-        question: "Which plant is commonly known as a medicinal plant?",
-        options: ["Tulsi", "Rose", "Mango", "Wheat"],
+        question:
+            "Which plant is commonly known as a medicinal plant?",
+
+        options: [
+            "Tulsi",
+            "Rose",
+            "Mango",
+            "Wheat"
+        ],
+
         answer: "Tulsi"
     },
 
+
     {
-        question: "Which plant is commonly used as a spice?",
-        options: ["Ginger", "Rose", "Grass", "Sunflower"],
+        question:
+            "Which plant is commonly used as a spice?",
+
+        options: [
+            "Ginger",
+            "Rose",
+            "Grass",
+            "Sunflower"
+        ],
+
         answer: "Ginger"
     },
 
+
     {
-        question: "Which plant is known for its natural insect-repellent properties?",
-        options: ["Neem", "Apple", "Rice", "Banana"],
+        question:
+            "Which plant is known for natural insect-repellent properties?",
+
+        options: [
+            "Neem",
+            "Apple",
+            "Rice",
+            "Banana"
+        ],
+
         answer: "Neem"
     },
 
+
     {
-        question: "Which plant is commonly used in traditional skin care?",
-        options: ["Aloe Vera", "Rice", "Wheat", "Corn"],
+        question:
+            "Which plant is commonly used in traditional skin care?",
+
+        options: [
+            "Aloe Vera",
+            "Rice",
+            "Wheat",
+            "Corn"
+        ],
+
         answer: "Aloe Vera"
     },
 
+
     {
-        question: "Which spice contains curcumin?",
-        options: ["Turmeric", "Ginger", "Pepper", "Cardamom"],
+        question:
+            "Which spice contains curcumin?",
+
+        options: [
+            "Turmeric",
+            "Ginger",
+            "Pepper",
+            "Cardamom"
+        ],
+
         answer: "Turmeric"
     }
+
 ];
 
 
-const quizContainer = document.getElementById("quizContainer");
-const quizResult = document.getElementById("quizResult");
-const quizRestart = document.getElementById("quizRestart");
+const quizContainer =
+    document.getElementById("quizContainer");
+
+const quizResult =
+    document.getElementById("quizResult");
+
+const quizRestart =
+    document.getElementById("quizRestart");
+
 
 let currentQuestion = 0;
 let quizScore = 0;
@@ -408,54 +588,81 @@ function loadQuizQuestion() {
 
     if (!quizContainer) return;
 
-    const question = quizQuestions[currentQuestion];
+    const question =
+        quizQuestions[currentQuestion];
 
     quizContainer.innerHTML = `
+
         <div class="quiz-question">
+
             <h3>
-                ${currentQuestion + 1}. ${question.question}
+                ${currentQuestion + 1}.
+                ${question.question}
             </h3>
 
             <div class="quiz-options">
+
                 ${question.options.map(option => `
-                    <button class="quiz-option" data-answer="${option}">
+
+                    <button
+                        class="quiz-option"
+                        data-answer="${option}">
+
                         ${option}
+
                     </button>
+
                 `).join("")}
+
             </div>
+
         </div>
+
     `;
 
-    document.querySelectorAll(".quiz-option").forEach(option => {
 
-        option.addEventListener("click", () => {
+    document.querySelectorAll(".quiz-option")
+        .forEach(option => {
 
-            checkQuizAnswer(option.dataset.answer);
+            option.addEventListener("click", () => {
+
+                checkQuizAnswer(
+                    option.dataset.answer
+                );
+
+            });
+
         });
 
-    });
 }
 
 
-function checkQuizAnswer(selectedAnswer) {
+function checkQuizAnswer(answer) {
 
-    const correctAnswer =
-        quizQuestions[currentQuestion].answer;
+    if (
+        answer ===
+        quizQuestions[currentQuestion].answer
+    ) {
 
-    if (selectedAnswer === correctAnswer) {
         quizScore++;
+
     }
 
     currentQuestion++;
 
-    if (currentQuestion < quizQuestions.length) {
+    if (
+        currentQuestion <
+        quizQuestions.length
+    ) {
 
         loadQuizQuestion();
 
     } else {
 
         showQuizResult();
+
     }
+
 }
 
 
@@ -468,20 +675,29 @@ function showQuizResult() {
     if (quizResult) {
 
         quizResult.innerHTML = `
-            <h3>🎉 Quiz Completed!</h3>
+
+            <h3>
+                🎉 Quiz Completed!
+            </h3>
 
             <p>
                 Your Score:
-                <strong>${quizScore}/${quizQuestions.length}</strong>
+                <strong>
+                    ${quizScore}/${quizQuestions.length}
+                </strong>
             </p>
+
         `;
 
         quizResult.classList.add("show");
+
     }
 
     if (quizRestart) {
-        quizRestart.style.display = "inline-block";
+        quizRestart.style.display =
+            "inline-block";
     }
+
 }
 
 
@@ -493,14 +709,20 @@ if (quizRestart) {
         quizScore = 0;
 
         if (quizResult) {
+
             quizResult.classList.remove("show");
+
             quizResult.innerHTML = "";
+
         }
 
-        quizRestart.style.display = "none";
+        quizRestart.style.display =
+            "none";
 
         loadQuizQuestion();
+
     });
+
 }
 
 
@@ -510,11 +732,14 @@ if (quizContainer) {
 
 
 // ==========================================
-// BACKGROUND MUSIC
+// MUSIC
 // ==========================================
 
-const music = document.getElementById("backgroundMusic");
-const musicBtn = document.getElementById("musicBtn");
+const music =
+    document.getElementById("backgroundMusic");
+
+const musicBtn =
+    document.getElementById("musicBtn");
 
 let musicPlaying = false;
 
@@ -527,7 +752,8 @@ if (musicBtn && music) {
 
             music.pause();
 
-            musicBtn.textContent = "🎵 Music";
+            musicBtn.textContent =
+                "🎵 Music";
 
             musicPlaying = false;
 
@@ -536,20 +762,24 @@ if (musicBtn && music) {
             music.play()
                 .then(() => {
 
-                    musicBtn.textContent = "⏸️ Pause";
+                    musicBtn.textContent =
+                        "⏸️ Pause";
 
                     musicPlaying = true;
 
                 })
                 .catch(() => {
 
-                    alert("Please tap the music button again to start the music.");
+                    alert(
+                        "Please tap the music button again."
+                    );
 
                 });
 
         }
 
     });
+
 }
 
 
@@ -557,45 +787,53 @@ if (musicBtn && music) {
 // READ ALOUD
 // ==========================================
 
-const readButtons = document.querySelectorAll(".read-aloud");
+document.querySelectorAll(".read-aloud")
+    .forEach(button => {
 
+        button.addEventListener("click", () => {
 
-readButtons.forEach(button => {
+            const target =
+                document.getElementById(
+                    button.dataset.target
+                );
 
-    button.addEventListener("click", () => {
+            if (!target) return;
 
-        const targetId = button.dataset.target;
-        const target = document.getElementById(targetId);
+            if (!("speechSynthesis" in window)) {
 
-        if (!target) return;
+                alert(
+                    "Read Aloud is not supported."
+                );
 
-        if (!("speechSynthesis" in window)) {
+                return;
+            }
 
-            alert("Read Aloud is not supported in this browser.");
+            window.speechSynthesis.cancel();
 
-            return;
-        }
+            const speech =
+                new SpeechSynthesisUtterance(
+                    target.innerText
+                );
 
-        window.speechSynthesis.cancel();
+            speech.lang = "en-IN";
+            speech.rate = 0.9;
+            speech.pitch = 1;
 
-        const speech =
-            new SpeechSynthesisUtterance(target.innerText);
+            window.speechSynthesis.speak(
+                speech
+            );
 
-        speech.lang = "en-IN";
-        speech.rate = 0.9;
-        speech.pitch = 1;
+        });
 
-        window.speechSynthesis.speak(speech);
     });
-
-});
 
 
 // ==========================================
 // BACK TO TOP
 // ==========================================
 
-const backToTop = document.getElementById("backToTop");
+const backToTop =
+    document.getElementById("backToTop");
 
 
 window.addEventListener("scroll", () => {
@@ -609,6 +847,7 @@ window.addEventListener("scroll", () => {
     } else {
 
         backToTop.classList.remove("show");
+
     }
 
 });
@@ -629,7 +868,7 @@ if (backToTop) {
 
 
 // ==========================================
-// SCROLL REVEAL ANIMATION
+// SCROLL REVEAL
 // ==========================================
 
 const revealElements =
@@ -646,24 +885,30 @@ function revealOnScroll() {
         const elementTop =
             element.getBoundingClientRect().top;
 
-        if (elementTop < windowHeight - 80) {
+        if (
+            elementTop <
+            windowHeight - 80
+        ) {
 
             element.classList.add("active");
 
         }
 
     });
+
 }
 
 
-window.addEventListener("scroll", revealOnScroll);
+window.addEventListener(
+    "scroll",
+    revealOnScroll
+);
 
 revealOnScroll();
 
 
 // ==========================================
-// KEYBOARD SEARCH SHORTCUT
-// Ctrl + K
+// CTRL + K SEARCH
 // ==========================================
 
 document.addEventListener("keydown", event => {
@@ -688,42 +933,54 @@ document.addEventListener("keydown", event => {
 // SMOOTH SCROLL
 // ==========================================
 
-document.querySelectorAll('a[href^="#"]').forEach(link => {
+document.querySelectorAll(
+    'a[href^="#"]'
+).forEach(link => {
 
-    link.addEventListener("click", event => {
+    link.addEventListener(
+        "click",
+        event => {
 
-        const targetId =
-            link.getAttribute("href");
+            const targetId =
+                link.getAttribute("href");
 
-        if (
-            targetId &&
-            targetId !== "#"
-        ) {
+            if (
+                targetId &&
+                targetId !== "#"
+            ) {
 
-            const target =
-                document.querySelector(targetId);
+                const target =
+                    document.querySelector(
+                        targetId
+                    );
 
-            if (target) {
+                if (target) {
 
-                event.preventDefault();
+                    event.preventDefault();
 
-                target.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
+                    target.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                }
 
             }
 
         }
-
-    });
+    );
 
 });
 
 
 // ==========================================
-// CONSOLE MESSAGE
+// WEBSITE MESSAGE
 // ==========================================
 
-console.log("🌿 Herbal Plants CSP Website Loaded Successfully!");
-console.log("🌱 Loading screen removed.");
+console.log(
+    "🌿 Herbal Plants CSP Website loaded successfully!"
+);
+
+console.log(
+    "Loading screen has been removed."
+);
